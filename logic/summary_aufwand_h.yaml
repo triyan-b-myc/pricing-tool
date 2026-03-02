@@ -1,0 +1,284 @@
+variable_questions: '["b1", "d8", "c1", "c12"]'
+constant_questions: '["c2", "b3", "c7", "c9", "c10", "c4", "c6", "c11", "kam", "c19", "c17", "d7", "b8", "c14", "c15"]'
+
+# fn_get_cc is a function. 
+# It takes in the name of the question q e.g. b1 and the cost component cc e.g. liz_b
+# It returns the value of the variable q_cc, e.g the value of b1_liz_b
+# It returns the default d if q_cc does not exist
+# qdata holds all the variables and their values
+# This enables us to dynamically define which variable to look up, which is not possible with just the $ syntax
+# Example usage: $fn_get_cc("b1", $some_other_variable)
+fn_get_cc: 'lambda q, cc, d: qdata.get(f"{q}_{cc}", d) if qdata.get(f"{q}_{cc}", d) is not None else d'
+
+fn_get_aufwand: 'lambda cc: math.prod($fn_get_cc(q, cc, 1) for q in $variable_questions) * sum($fn_get_cc(q, cc, 0) for q in $constant_questions)'
+
+fn_sum_aufwand: 'lambda ccs: sum($aw_h[key] for key in ccs)'
+
+# Instead of defining a huge amount of variables for all the cost components, we create a map called aw_h, whose keys are the cost components
+# and values are the totals across all questions
+aw_h: '{cc: $fn_get_aufwand(cc) for cc in $const_table_cost_components}'
+
+fn_mround: 'lambda a, m: math.floor(a/m + 0.5) * m'
+# Convert hours to workdays (nearest 0.25)
+fn_htod: 'lambda hrs: $fn_mround(hrs/$const_hours_per_workday, 0.25)'
+# Convert hours to cost
+fn_htochf: 'lambda hrs: $fn_htod(hrs) * $daily_rate'
+
+### Module summaries (from aw_h)
+## A
+aw_h_a_ia:                     $fn_sum_aufwand(["a_ia_adv", "a_ia_cust"])
+
+## B
+aw_chf_b_liz:                  $fn_sum_aufwand(["liz_b"])
+
+## C (IA)
+# C1
+aw_chf_c_c1_liz:               $fn_sum_aufwand(["liz_ia_adv", "liz_ia_cust"])
+aw_h_c_c1_tool_min:            $fn_sum_aufwand(["c1_ia_adv_tool", "c1_ia_events", "c1_ia_cust_tool", "c1_ia_cust_min_customizing", "c1_ia_cust_min_pl"])
+aw_h_c_c1_tool_max:            $fn_sum_aufwand(["c1_ia_adv_tool", "c1_ia_cust_tool", "c1_ia_cust_max_customizing", "c1_ia_cust_max_pl"])
+aw_h_c_c1_ef_min:              $fn_sum_aufwand(["c1_ia_adv_ef", "c1_ia_cust_min_ef"])
+aw_h_c_c1_ef_max:              $fn_sum_aufwand(["c1_ia_adv_ef", "c1_ia_cust_max_ef"])
+# C2    
+aw_h_c_c2_kickoff_min:         $fn_sum_aufwand(["c2_ia_adv", "c2_ia_cust_min"])
+aw_h_c_c2_kickoff_max:         $fn_sum_aufwand(["c2_ia_adv", "c2_ia_cust_max"])
+# C3    
+aw_h_c_c3_daten:               $fn_sum_aufwand(["c3_ia_adv", "c3_ia_hotels", "c3_ia_events", "c3_ia_print_silber", "c3_ia_print_gold", "c3_ia_cust"])
+aw_chf_c_c3_liz_extrajahre:    $fn_sum_aufwand(["liz_extrajahre"])
+# c3_extrajahre_min:    calculated below
+# c3_extrajahre_max:    calculated below
+
+# C4
+aw_h_c_c4_plaus_min:           $fn_sum_aufwand(["c4_ia_adv", "c4_ia_hotels", "c4_ia_events", "c4_ia_print_silber", "c4_ia_print_gold", "c4_ia_cust_min"])
+aw_h_c_c4_plaus_max:           $fn_sum_aufwand(["c4_ia_adv", "c4_ia_cust_max"])
+# C5    
+aw_h_c_c5_abschluss_min:       $fn_sum_aufwand(["c5_ia_adv", "c5_ia_hotels", "c5_ia_events", "c5_ia_print_silber", "c5_ia_print_gold", "c5_ia_cust_min"])
+aw_h_c_c5_abschluss_max:       $fn_sum_aufwand(["c5_ia_adv", "c5_ia_cust_max"])
+aw_h_c_c5_kb_min:              $fn_sum_aufwand(["c5_ia_adv_kb", "c5_ia_cust_min_kb"])
+aw_h_c_c5_kb_max:              $fn_sum_aufwand(["c5_ia_adv_kb", "c5_ia_cust_max_kb"])
+aw_h_c_c5_mb_min:              $fn_sum_aufwand(["c5_ia_adv_mb", "c5_ia_cust_min_mb"])
+aw_h_c_c5_mb_max:              $fn_sum_aufwand(["c5_ia_adv_mb", "c5_ia_cust_max_mb"])
+aw_h_c_c5_flag_min:            $fn_sum_aufwand(["c4_ia_cust_min_flag"])
+aw_h_c_c5_flag_max:            $fn_sum_aufwand(["c4_ia_cust_max_flag"])
+# Cx
+aw_h_c_cx_ms:                  $fn_mround($fn_sum_aufwand(["c1_ms", "c2_ms", "c3_ms", "c4_ms", "c5_ms"]), 1)
+aw_h_c_cx_kat_min:             $fn_sum_aufwand(["c1_ia_cust_min_kategorisierung"])
+aw_h_c_cx_kat_max:             $fn_sum_aufwand(["c1_ia_cust_max_kategorisierung"])
+aw_h_c_cx_audit:               '0'
+aw_chf_c_cx_liz_print:         $fn_sum_aufwand(["liz_ia_print_bronze", "liz_ia_print_silber", "liz_ia_print_gold"])
+
+## F
+aw_h_f_f1_min:                 '0'
+aw_h_f_f1_max:                 '0'
+aw_chf_f_f2_liz:               $fn_sum_aufwand(["liz_dl_adv", "liz_dl_cust"])
+aw_h_f_f2_min:                 $fn_sum_aufwand(["c1_dl_adv_tool", "c1_dl_adv_ef", "c1_dl_events", "c1_dl_cust_min_kategorisierung", "c2_dl_adv", "c2_dl_cust_min", "c1_dl_cust_tool", "c1_dl_cust_min_pl", "c3_dl_adv", "c3_dl_hotels", "c3_dl_events", "c3_dl_cust", "c4_dl_adv", "c4_dl_hotels", "c4_dl_events", "c4_dl_cust_min", "c4_dl_cust_min_flag", "f2_ms", "c5_dl_adv", "c5_dl_adv_kb", "c5_dl_adv_mb", "c5_dl_hotels", "c5_dl_events", "c5_dl_cust_min", "c5_dl_cust_min_kb", "c5_dl_cust_min_mb"])
+aw_h_f_f2_max:                 $fn_sum_aufwand(["c1_dl_adv_tool", "c1_dl_adv_ef", "c2_dl_adv", "c2_dl_cust_max", "c3_dl_adv", "c4_dl_adv", "c1_dl_cust_tool", "c1_dl_cust_max_pl", "c3_dl_cust", "c4_dl_cust_max", "c4_dl_cust_max_flag", "c1_dl_cust_max_kategorisierung", "f2_ms", "c5_dl_adv", "c5_dl_adv_kb", "c5_dl_adv_mb", "c5_dl_cust_max", "c5_dl_cust_max_kb", "c5_dl_cust_max_mb"])
+aw_h_f_f3_min:                 '0'
+aw_h_f_f3_max:                 '0'
+aw_h_f_f4_min:                 '0'
+aw_h_f_f4_max:                 '0'
+aw_h_f_f5_min:                 '0'
+aw_h_f_f5_max:                 '0'
+aw_h_f_fx_min:                 $fn_sum_aufwand(["fx_a_dl_cust", "fx_dl_cust_min_customizing", "fx_dl_cust_min_ef", "fx_dl_cust_pl"])
+aw_h_f_fx_max:                 $fn_sum_aufwand(["fx_a_dl_cust", "fx_dl_cust_max_customizing", "fx_dl_cust_max_ef", "fx_dl_cust_pl"])
+
+## C (DL)
+# C1
+aw_chf_c_c1_dl_liz:            $fn_sum_aufwand(["liz_dl_adv", "liz_dl_cust", "liz_dl_print"])
+aw_h_c_c1_dl_tool_min:         $fn_sum_aufwand(["c1_dl_adv_tool", "c1_dl_adv_ef", "c1_dl_events", "c1_dl_cust_tool", "c1_dl_cust_min_pl"])
+aw_h_c_c1_dl_tool_max:         $fn_sum_aufwand(["c1_dl_adv_tool", "c1_dl_adv_ef", "c1_dl_cust_tool", "c1_dl_cust_max_pl"])
+# C2
+aw_h_c_c2_dl_kickoff_min:      $fn_sum_aufwand(["c2_dl_adv", "c2_dl_cust_min"])
+aw_h_c_c2_dl_kickoff_max:      $fn_sum_aufwand(["c2_dl_adv", "c2_dl_cust_max"])
+# C3
+aw_h_c_c3_dl_daten_min:        $fn_sum_aufwand(["c3_dl_adv", "c3_dl_hotels", "c3_dl_events", "c3_dl_print_silber", "c3_dl_print_gold", "c3_dl_cust"])
+aw_h_c_c3_dl_daten_max:        $fn_sum_aufwand(["c3_dl_adv", "c3_dl_cust"])
+# C4
+aw_h_c_c4_dl_plaus_min:        $fn_sum_aufwand(["c4_dl_adv", "c4_dl_hotels", "c4_dl_events", "c4_dl_print_silber", "c4_dl_print_gold", "c4_dl_cust_min"])
+aw_h_c_c4_dl_plaus_max:        $fn_sum_aufwand(["c4_dl_adv", "c4_dl_cust_max"])
+# C5
+aw_h_c_c5_dl_abschluss_min:    $fn_sum_aufwand(["c5_dl_adv", "c5_dl_hotels", "c5_dl_events", "c5_dl_print_silber", "c5_dl_print_gold", "c5_dl_cust_min"])
+aw_h_c_c5_dl_abschluss_max:    $fn_sum_aufwand(["c5_dl_adv", "c5_dl_cust_max"])
+aw_h_c_c5_dl_kb_min:           $fn_sum_aufwand(["c5_dl_adv_kb", "c5_dl_cust_min_kb"])
+aw_h_c_c5_dl_kb_max:           $fn_sum_aufwand(["c5_dl_adv_kb", "c5_dl_cust_max_kb"])
+aw_h_c_c5_dl_mb_min:           $fn_sum_aufwand(["c5_dl_adv_mb", "c5_dl_cust_min_mb"])
+aw_h_c_c5_dl_mb_max:           $fn_sum_aufwand(["c5_dl_adv_mb", "c5_dl_cust_max_mb"])
+aw_h_c_c5_dl_flag_min:         $fn_sum_aufwand(["c4_dl_cust_min_flag"])
+aw_h_c_c5_dl_flag_max:         $fn_sum_aufwand(["c4_dl_cust_max_flag"])
+# Cx
+aw_h_c_cx_dl_ms_min:           $fn_mround($fn_sum_aufwand(["f2_ms"]), 1)
+aw_h_c_cx_dl_ms_max:           $fn_mround($fn_sum_aufwand(["f2_ms"]), 1)
+aw_h_c_cx_dl_kat_min:          $fn_sum_aufwand(["c1_dl_cust_min_kategorisierung"])
+aw_h_c_cx_dl_kat_max:          $fn_sum_aufwand(["c1_dl_cust_max_kategorisierung"])
+aw_h_c_cx_dl_audit_min:        '0'
+aw_h_c_cx_dl_audit_max:        '0'
+aw_chf_c_cx_dl_liz_print:      $fn_sum_aufwand(["liz_dl_print_bronze", "liz_dl_print_silber", "liz_dl_print_gold"])
+aw_h_c_cx_dl_review_min:       '0'
+aw_h_c_cx_dl_review_max:       '0'
+
+# C3 (IA)
+aw_h_c_c3_extrajahre_min:      $fn_mround($fn_sum_aufwand(["ia_adv_extrajahre", "ia_cust_extrajahre"]) * sum([$aw_h_c_c1_dl_tool_min, $aw_h_c_c3_dl_daten_min, $aw_h_c_c4_dl_plaus_min, $aw_h_c_c5_dl_abschluss_min, $aw_h_c_c5_dl_kb_min, $aw_h_c_c5_dl_mb_min, $aw_h_c_c5_dl_flag_min, $aw_h_c_cx_dl_ms_min, $aw_h_c_cx_dl_kat_min, $aw_h_c_cx_dl_audit_min, $aw_h_c_cx_dl_review_min]), 0.5)
+aw_h_c_c3_extrajahre_max:      $fn_mround($fn_sum_aufwand(["ia_adv_extrajahre", "ia_cust_extrajahre"]) * sum([$aw_h_c_c1_dl_tool_max, $aw_h_c_c3_dl_daten_max, $aw_h_c_c4_dl_plaus_max, $aw_h_c_c5_dl_abschluss_max, $aw_h_c_c5_dl_kb_max, $aw_h_c_c5_dl_mb_max, $aw_h_c_c5_dl_flag_max, $aw_h_c_cx_dl_ms_max, $aw_h_c_cx_dl_kat_max, $aw_h_c_cx_dl_audit_max, $aw_h_c_cx_dl_review_max]), 0.5)
+
+# Helper variables for aggregation
+list_aw_h_c_min: |
+  [
+    $aw_h_c_c1_tool_min,
+    $aw_h_c_c1_ef_min,
+    $aw_h_c_c2_kickoff_min,
+    $aw_h_c_c3_daten,
+    $aw_h_c_c3_extrajahre_min,
+    $aw_h_c_c4_plaus_min,
+    $aw_h_c_c5_abschluss_min,
+    $aw_h_c_c5_kb_min,
+    $aw_h_c_c5_mb_min,
+    $aw_h_c_c5_flag_min,
+    $aw_h_c_cx_ms
+  ]
+
+list_aw_h_c_max: |
+  [
+    $aw_h_c_c1_tool_max,
+    $aw_h_c_c1_ef_max,
+    $aw_h_c_c2_kickoff_max,
+    $aw_h_c_c3_daten,
+    $aw_h_c_c3_extrajahre_max,
+    $aw_h_c_c4_plaus_max,
+    $aw_h_c_c5_abschluss_max,
+    $aw_h_c_c5_kb_max,
+    $aw_h_c_c5_mb_max,
+    $aw_h_c_c5_flag_max,
+    $aw_h_c_cx_ms
+  ]
+
+list_aw_h_f2_min: |
+  [
+    $aw_h_c_c1_dl_tool_min,
+    $aw_h_c_c2_dl_kickoff_min,
+    $aw_h_c_c3_dl_daten_min,
+    $aw_h_c_c4_dl_plaus_min,
+    $aw_h_c_c5_dl_abschluss_min,
+    $aw_h_c_c5_dl_kb_min,
+    $aw_h_c_c5_dl_mb_min,
+    $aw_h_c_c5_dl_flag_min,
+    $aw_h_c_cx_dl_ms_min,
+    $aw_h_c_cx_dl_review_min
+  ]
+
+list_aw_h_f2_max: |
+  [
+    $aw_h_c_c1_dl_tool_max,
+    $aw_h_c_c2_dl_kickoff_max,
+    $aw_h_c_c3_dl_daten_max,
+    $aw_h_c_c4_dl_plaus_max,
+    $aw_h_c_c5_dl_abschluss_max,
+    $aw_h_c_c5_dl_kb_max,
+    $aw_h_c_c5_dl_mb_max,
+    $aw_h_c_c5_dl_flag_max,
+    $aw_h_c_cx_dl_ms_max,
+    $aw_h_c_cx_dl_review_max
+  ]
+
+## Aggregates
+aw_h_total_c_min: sum($list_aw_h_c_min)
+aw_d_total_c_min: sum(map($fn_htod, $list_aw_h_c_min))
+aw_d_total_c_max: sum(map($fn_htod, $list_aw_h_c_max))
+aw_chf_total_c_min: sum(map($fn_htochf, $list_aw_h_c_min)) + $aw_chf_c_c1_liz + $aw_chf_c_c3_liz_extrajahre
+aw_chf_total_c_max: sum(map($fn_htochf, $list_aw_h_c_max)) + $aw_chf_c_c1_liz + $aw_chf_c_c3_liz_extrajahre
+
+aw_h_total_f2_min: sum($list_aw_h_f2_min)
+aw_d_total_f2_min: sum(map($fn_htod, $list_aw_h_f2_min))
+aw_d_total_f2_max: sum(map($fn_htod, $list_aw_h_f2_max))
+aw_chf_total_f2_min: sum(map($fn_htochf, $list_aw_h_f2_min)) + $aw_chf_c_c1_dl_liz
+aw_chf_total_f2_max: sum(map($fn_htochf, $list_aw_h_f2_max)) + $aw_chf_c_c1_dl_liz
+
+list_aw_h_f_min: '[$aw_h_f_f1_min, $aw_h_f_fx_min]'
+list_aw_h_f_max: '[$aw_h_f_f1_max, $aw_h_f_fx_max]'
+aw_h_total_f_min: sum($list_aw_h_f_min) + $aw_h_total_f2_min
+aw_d_total_f_min: sum(map($fn_htod, $list_aw_h_f_min)) + $aw_d_total_f2_min
+aw_d_total_f_max: sum(map($fn_htod, $list_aw_h_f_max)) + $aw_d_total_f2_max
+aw_chf_total_f_min: sum(map($fn_htochf, $list_aw_h_f_min)) + $aw_chf_total_f2_min
+aw_chf_total_f_max: sum(map($fn_htochf, $list_aw_h_f_max)) + $aw_chf_total_f2_max
+
+# PL
+aw_h_pl_min: |
+  $fn_mround(
+    0 if $ccf_sol_type is None else \
+    1 + 0.25*($C4 - 1) if $ccf_sol_type == 'Standard-Lösungen' else \
+    $Z5/100 * sum([$aw_h_a_ia, $aw_h_total_c_min])
+  , 0.25)
+aw_d_pl_min: |
+  $fn_mround(
+    0 if $ccf_sol_type is None else \
+    (1 + 0.25*($C4 - 1))/$const_hours_per_workday if $ccf_sol_type == 'Standard-Lösungen' else \
+    $Z5/100 * sum([$fn_htod($aw_h_a_ia), $aw_d_total_c_min])
+  , 0.25)
+aw_d_pl_max: |
+  $fn_mround(
+    0 if $ccf_sol_type is None else \
+    (1 + 0.25*($C4 - 1))/$const_hours_per_workday if $ccf_sol_type == 'Standard-Lösungen' else \
+    $Z5/100 * sum([$fn_htod($aw_h_a_ia), $aw_d_total_c_max])
+  , 0.25)
+aw_chf_pl_min: |
+  0 if $ccf_sol_type is None else \
+  $aw_h_pl_min/$const_hours_per_workday*$daily_rate if $ccf_sol_type == 'Standard-Lösungen' else \
+  $aw_d_pl_min*$daily_rate
+aw_chf_pl_max: $aw_d_pl_max*$daily_rate
+
+# PL (DL)
+aw_h_pl_dl_min: |
+  $fn_mround(
+    0 if $C21 == 'Print Bronze' or $ccf_sol_type is None else \
+    1 + 0.25*($C4 - 1) if $ccf_sol_type == 'Standard-Lösungen' else \
+    $Z5/100 * $aw_h_total_f_min
+  , 0.25)
+aw_d_pl_dl_min: |
+  $fn_mround(
+    0 if $ccf_sol_type is None else \
+    (1 + 0.25*($C4 - 1))/$const_hours_per_workday if $ccf_sol_type == 'Standard-Lösungen' else \
+    $Z5/100 * $aw_d_total_f_min
+  , 0.25)
+aw_d_pl_dl_max: |
+  $fn_mround(
+    0 if $ccf_sol_type is None else \
+    (1 + 0.25*($C4 - 1))/$const_hours_per_workday if $ccf_sol_type == 'Standard-Lösungen' else \
+    $Z5/100 * $aw_d_total_f_max
+  , 0.25)
+aw_chf_pl_dl_min: |
+  0 if $ccf_sol_type is None else \
+  $aw_h_pl_dl_min/$const_hours_per_workday*$daily_rate if $ccf_sol_type == 'Standard-Lösungen' else \
+  $aw_d_pl_dl_min*$daily_rate
+aw_chf_pl_dl_max: $aw_d_pl_dl_max*$daily_rate if $ccf_sol_type is not None else 0
+
+aw_h_year1_services_min: $aw_h_a_ia + $aw_h_total_c_min + $aw_h_pl_min
+aw_d_year1_services_min: $fn_htod($aw_h_a_ia) + $aw_d_total_c_min + $aw_d_pl_min
+aw_d_year1_services_max: $fn_htod($aw_h_a_ia) + $aw_d_total_c_max + $aw_d_pl_max
+aw_chf_year1_services_min: | 
+  $aw_h_year1_services_min / $const_hours_per_workday * $daily_rate if $ccf_sol_type == 'Standard-Lösungen' else \
+  $aw_d_year1_services_min * $daily_rate
+aw_chf_year1_services_max: | 
+  $aw_chf_year1_services_min if $ccf_sol_type == 'Standard-Lösungen' else \
+  $aw_d_year1_services_max * $daily_rate
+
+aw_chf_year1_licences_min: $aw_chf_b_liz + $aw_chf_c_c1_liz + $aw_chf_c_c3_liz_extrajahre
+aw_chf_year1_licences_max: $aw_chf_year1_licences_min
+
+aw_chf_year1_solution_min: $aw_chf_year1_services_min + $aw_chf_year1_licences_min
+aw_chf_year1_solution_max: $aw_chf_year1_services_max + $aw_chf_year1_licences_max
+
+aw_h_subseq_services_min: $aw_h_total_f_min + $aw_h_pl_dl_min
+aw_d_subseq_services_min: $aw_d_total_f_min + $aw_d_pl_dl_min
+aw_d_subseq_services_max: $aw_d_total_f_max + $aw_d_pl_dl_max
+aw_chf_subseq_services_min: | 
+  $aw_h_subseq_services_min / $const_hours_per_workday * $daily_rate if $ccf_sol_type == 'Standard-Lösungen' else \
+  $aw_d_subseq_services_min * $daily_rate
+aw_chf_subseq_services_max: | 
+  $aw_chf_subseq_services_min if $ccf_sol_type == 'Standard-Lösungen' else \
+  $aw_d_subseq_services_max * $daily_rate
+
+aw_chf_subseq_licences_min: $aw_chf_c_c1_dl_liz
+aw_chf_subseq_licences_max: $aw_chf_subseq_licences_min
+
+aw_chf_subseq_solution_min: $aw_chf_subseq_services_min + $aw_chf_subseq_licences_min
+aw_chf_subseq_solution_max: $aw_chf_subseq_services_max + $aw_chf_subseq_licences_max
+
+margin_year1: $aw_chf_year1_solution_min - ($aw_d_year1_services_min * $const_hours_per_workday + $Z7) * $const_internal_hourly_rate

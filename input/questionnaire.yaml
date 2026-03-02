@@ -1,0 +1,222 @@
+Z:
+  Z1:
+    type: text
+  Z2:
+    type: text
+  Z3:
+    type: select
+    options: options.z3
+  Z4:
+    type: select
+    options: options.z4
+  Z5:
+    type: num_slider
+    slider: 0:100:5:10
+  Z6:
+    type: select
+    options: options.z6
+  Z7:
+    type: num_slider
+    slider: 10:200:5:100
+A:
+  A1:
+    type: select
+    options: options.a1
+B:
+  B1:
+    type: select
+    options: options.b1
+  B2:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 in [0, 1]"
+  B3:
+    type: select
+    options: options.b3
+    required_if: "$B1 == 0"
+  B4:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 == 0"
+  B5:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 in [0, 1]"
+  B6:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 in [0, 1]"
+  B7:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 in [0, 1]"
+  B8:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 in [0, 1]"
+C_profile:
+  C1:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 == 0"
+  C2:
+    type: num_slider
+    slider: "1:5:1:1"
+    required_if: "$B1 == 0 and $C1 == 0"
+  C3:
+    type: select
+    options: options.c3
+    required_if: "$B1 in [0, 2]"
+  C4:
+    type: num_slider
+    slider: "1:75:1:1"
+    required_if: "$B1 in [0, 2]"
+  C5:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 == 0 and $C4 not in [None, '', 1]"
+  C6:
+    type: select
+    options: options.c6
+    required_if: "$B1 == 0 and $C5 == 0"
+  C7:
+    type: select
+    options: options.c7
+    required_if: "$B1 == 0 and $B2 == 0"
+  C8:
+    type: select
+    options: options.c8
+    required_if: "$B1 == 0 and $C7 not in [None, 0]"
+  C9:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 == 0 and $C7 not in [None, 0]"
+  C10:
+    type: num_slider
+    slider: "0:25:1:0"
+    required_if: "$B1 == 0 and $C7 not in [None, 0]"
+  C11:
+    type: select
+    options: options.c11
+    required_if: "$B1 == 0"
+  C12:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 == 0"
+C_reporting:
+  C13:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 in [0, 1]"
+  C14:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 in [0, 1]"
+  C15:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 in [0, 1]"
+  C16:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 in [0, 1] and $B2 != 1 and $B4 != 0"
+  C17:
+    type: select
+    options: options.yes_no
+    required_if: "$B1 in [0, 1] and $B2 != 1 and $B4 != 0 and $C16 == 0"
+C_print:
+  C18:
+    type: select
+    options: options.c18
+    required_if: "$B1 in [0, 1] and $B2 == 1 and $B4 == 1 and $B6 == 1 and $B7 == 1 and $C3 == 6"
+  C19:
+    type: select
+    options: options.yes_no
+    required_if: "$C18 == 2"
+D:
+  D1:
+    type: select
+    options: options.d1
+    required_if: "$B4 == 0"
+  D2:
+    type: select
+    options: options.yes_no
+    required_if: "$B4 == 0 and $D1 in [0, 1, 2]"
+  D3:
+    type: select
+    options: options.yes_no
+    required_if: "$B4 == 0 and $D1 in [0, 1, 2]"
+  D4:
+    type: select
+    options: options.yes_no
+    required_if: "$B4 == 0 and $D1 in [0, 1, 2]"
+  D4:
+    type: select
+    options: options.yes_no
+    required_if: "$B4 == 0 and $D1 in [0, 1, 2]"
+  D5:
+    type: select
+    options: options.yes_no
+    required_if: "$B4 == 0 and $D1 in [0, 1, 2]"
+  D6:
+    type: select
+    options: options.yes_no
+    required_if: "$B4 == 0 and $D1 in [0, 1, 2]"
+  D8:
+    type: select
+    options: options.yes_no
+    required_if: "$B4 == 0 and $D1 in [0, 1, 2]"
+  D7: # Because of the D8 dependency, D7 must come after D8
+    type: select
+    options: options.yes_no
+    required_if: "$B4 == 0 and $D1 in [0, 1, 2] and $D8 in [None, 1]"
+E:
+  E1:
+    type: select
+    options: options.yes_no
+    required_if: "$B5 == 0"
+  E2:
+    type: select
+    options: options.yes_no
+    required_if: "$E1 == 0"
+  E3:
+    type: select
+    options: options.yes_no
+    required_if: "$E1 == 1"
+  E4:
+    type: select
+    options: options.yes_no
+    required_if: "$B5 == 0"
+  E4:
+    type: select
+    options: options.yes_no
+    required_if: "$B5 == 0"
+  E5:
+    type: num_slider
+    slider: "1:12:1:1"
+    required_if: "$E4 == 0"
+  E6:
+    type: select
+    options: options.yes_no
+    required_if: "$B5 == 0"
+  E7:
+    type: select
+    options: options.yes_no
+    required_if: "$B5 == 0"
+  E8:
+    type: select
+    options: options.yes_no
+    required_if: "$B5 == 0"
+  E9:
+    type: num_slider
+    slider: "1:8:1:1"
+    required_if: "$E8 == 0"
+  E10:
+    type: select
+    options: options.yes_no
+    required_if: "$B5 == 0"
+  E11:
+    type: select
+    options: options.yes_no
+    required_if: "$B5 == 0"
+    

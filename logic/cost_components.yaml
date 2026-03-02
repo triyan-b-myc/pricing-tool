@@ -1,0 +1,502 @@
+C20: |
+  None              if $B1 in [None, 1] else \
+  'Print Bronze'    if $B1 == 2 else \
+  'CCF Customized'  if $B6 == 0 else \
+  'CCF Customized'  if $B7 == 0 else \
+  'CCF Customized'  if $B2 == 0 else \
+  'CCF Customized'  if ($B4 == 0 and $D3 == 0) else \
+  'CCF Advanced'    if ($B4 == 0 and $D8 == 0) else \
+  'CCF Customized'  if $B4 == 0 else \
+  'CCF Customized'  if $C16 == 0 else \
+  'Print Silber'    if $C18 == 0 else \
+  'Print Silber'    if $C18 == 1 else \
+  'Print Gold'      if $C18 == 2 else \
+  'CCF Hotels'      if $C3 == 5 else \
+  'CF Events'       if $C3 == 4 else \
+  'CCF Advanced'    if $C3 == 1 else \
+  'CCF Advanced + kleines Mapping' if $C3 in [0, 2, 3] else \
+  'CCF Customized'
+
+C21: |
+  'CCF Customized'  if ($B4 == 0 and $D8 == 0) else \
+  'Print Bronze'    if ($B1 == 0 and $C18 == 0) else \
+  $C20
+
+ccf_sol_type: |
+  None              if $C20 is None else \
+  'Print Bronze'    if $C20 == 'Print Bronze' else \
+  'Standard-Lösungen' if $C20 in ['CCF Advanced', 'CCF Advanced + kleines Mapping', 'Print Silber', 'Print Gold', 'CCF Hotels', 'CF Events'] else \
+  'Customized-Lösungen'
+
+daily_rate: $const_table_tool_daily_rate[$Z3][$Z4] if ($Z3 is not None and $Z4 is not None) else 0
+
+
+### B1
+## Lizenz
+b1_liz_extrajahre: $B1 == 0 and $C20 in ['CCF Advanced', 'CCF Advanced + kleines Mapping', 'Print Silber', 'Print Gold', 'CCF Customized', 'CF Events', 'CCF Hotels']
+## Initialaufwand
+b1_ia_adv_extrajahre: $B1 == 0 and $C20 in ['CCF Advanced', 'CCF Advanced + kleines Mapping', 'Print Silber', 'Print Gold', 'CF Events', 'CCF Hotels']
+b1_liz_ia_adv: $b1_ia_adv_extrajahre
+b1_a_ia_adv: $B1 == 0 and $C20 == 'CCF Advanced + kleines Mapping'
+b1_c1_ia_adv_tool: $b1_ia_adv_extrajahre
+b1_c1_ia_adv_ef: $b1_ia_adv_extrajahre
+b1_c2_ia_adv: $b1_ia_adv_extrajahre
+b1_c3_ia_adv: $b1_ia_adv_extrajahre
+b1_c4_ia_adv: $b1_ia_adv_extrajahre
+b1_c5_ia_adv: $b1_ia_adv_extrajahre
+b1_c5_ia_adv_kb: $b1_ia_adv_extrajahre
+b1_c5_ia_adv_mb: $b1_ia_adv_extrajahre
+# Hotels
+b1_c3_ia_hotels: $B1 == 0 and $C20 == 'CCF Hotels'
+b1_c4_ia_hotels: $b1_c3_ia_hotels
+b1_c5_ia_hotels: $b1_c3_ia_hotels
+# Events
+b1_c1_ia_events: $B1 == 0 and $C20 == 'CF Events'
+b1_c3_ia_events: $b1_c1_ia_events
+b1_c4_ia_events: $b1_c1_ia_events
+b1_c5_ia_events: $b1_c1_ia_events
+# Print
+b1_liz_ia_print_bronze: $B1 == 2
+b1_liz_ia_print_silber: $B1 == 0 and $C20 == 'Print Silber'
+b1_c3_ia_print_silber: $b1_liz_ia_print_silber
+b1_c4_ia_print_silber: $b1_liz_ia_print_silber
+b1_c5_ia_print_silber: $b1_liz_ia_print_silber
+b1_liz_ia_print_gold: $B1 == 0 and $C20 == 'Print Gold'
+b1_c3_ia_print_gold: $b1_liz_ia_print_gold
+b1_c4_ia_print_gold: $b1_liz_ia_print_gold
+b1_c5_ia_print_gold: $b1_liz_ia_print_gold
+## DL pro Jahr
+b1_liz_dl_adv: $B1 == 0 and $C21 in ['CCF Advanced', 'CCF Advanced + kleines Mapping', 'Print Silber', 'Print Gold', 'CF Events', 'CCF Hotels']
+b1_c1_dl_adv_tool: $b1_liz_dl_adv 
+b1_c1_dl_adv_ef: $b1_liz_dl_adv
+b1_c2_dl_adv: $b1_liz_dl_adv
+b1_c3_dl_adv: $b1_liz_dl_adv
+b1_c4_dl_adv: $b1_liz_dl_adv
+b1_c5_dl_adv: $b1_liz_dl_adv
+b1_c5_dl_adv_kb: $b1_liz_dl_adv
+b1_c5_dl_adv_mb: $b1_liz_dl_adv
+# Hotels
+b1_c3_dl_hotels: $B1 == 0 and $C21 == 'CF Events'
+b1_c4_dl_hotels: $b1_c3_dl_hotels
+b1_c5_dl_hotels: $b1_c3_dl_hotels
+# Events
+b1_c1_dl_events: $B1 == 0 and $C21 == 'CF Events'
+b1_c3_dl_events: $b1_c1_dl_events
+b1_c4_dl_events: $b1_c1_dl_events
+b1_c5_dl_events: $b1_c1_dl_events
+# Print
+b1_liz_dl_print_bronze: $B1 == 2 or ($B1 == 0 and $C21 == 'Print Bronze')
+b1_liz_dl_print_silber: $B1 == 0 and $C21 == 'Print Silber'
+b1_c3_dl_print_silber: $b1_liz_dl_print_silber
+b1_c4_dl_print_silber: $b1_liz_dl_print_silber
+b1_c5_dl_print_silber: $b1_liz_dl_print_silber
+b1_liz_dl_print_gold: $B1 == 0 and $C21 == 'Print Gold'
+b1_c3_dl_print_gold: $b1_liz_dl_print_gold
+b1_c4_dl_print_gold: $b1_liz_dl_print_gold
+b1_c5_dl_print_gold: $b1_liz_dl_print_gold
+## Initialaufwand (cust)
+b1_ia_cust_extrajahre: $B1 == 0 and $C20 == 'CCF Customized'
+b1_liz_ia_cust: $b1_ia_cust_extrajahre
+b1_a_ia_cust: $b1_ia_cust_extrajahre
+b1_c1_ia_cust_tool: $b1_ia_cust_extrajahre
+b1_c1_ia_cust_min_customizing: $b1_ia_cust_extrajahre
+b1_c1_ia_cust_max_customizing: $b1_ia_cust_extrajahre
+b1_c1_ia_cust_min_ef: $b1_ia_cust_extrajahre
+b1_c1_ia_cust_max_ef: $b1_ia_cust_extrajahre
+b1_c1_ia_cust_min_pl: $b1_ia_cust_extrajahre
+b1_c1_ia_cust_max_pl: $b1_ia_cust_extrajahre
+b1_c2_ia_cust_min: $b1_ia_cust_extrajahre
+b1_c2_ia_cust_max: $b1_ia_cust_extrajahre
+b1_c3_ia_cust: $b1_ia_cust_extrajahre
+b1_c4_ia_cust_min: $b1_ia_cust_extrajahre
+b1_c4_ia_cust_max: $b1_ia_cust_extrajahre
+b1_c5_ia_cust_min: $b1_ia_cust_extrajahre
+b1_c5_ia_cust_max: $b1_ia_cust_extrajahre
+b1_c1_ia_cust_min_kategorisierung: $b1_ia_cust_extrajahre
+b1_c1_ia_cust_max_kategorisierung: $b1_ia_cust_extrajahre
+b1_c5_ia_cust_min_kb: $b1_ia_cust_extrajahre
+b1_c5_ia_cust_max_kb: $b1_ia_cust_extrajahre
+b1_c5_ia_cust_min_mb: $b1_ia_cust_extrajahre
+b1_c5_ia_cust_max_mb: $b1_ia_cust_extrajahre
+## DL pro Jahr (cust)
+b1_liz_dl_cust: $B1 == 0 and $C21 == 'CCF Customized'
+b1_c1_dl_cust_tool: $b1_liz_dl_cust
+b1_c1_dl_cust_min_ef: $b1_liz_dl_cust
+b1_c1_dl_cust_max_ef: $b1_liz_dl_cust
+b1_c1_dl_cust_min_pl: $b1_liz_dl_cust
+b1_c1_dl_cust_max_pl: $b1_liz_dl_cust
+b1_c2_dl_cust_min: $b1_liz_dl_cust
+b1_c2_dl_cust_max: $b1_liz_dl_cust
+b1_c3_dl_cust: $b1_liz_dl_cust
+b1_c4_dl_cust_min: $b1_liz_dl_cust
+b1_c4_dl_cust_max: $b1_liz_dl_cust
+b1_c5_dl_cust_min: $b1_liz_dl_cust
+b1_c5_dl_cust_max: $b1_liz_dl_cust
+b1_c1_dl_cust_min_kategorisierung: $b1_liz_dl_cust 
+b1_c1_dl_cust_max_kategorisierung: $b1_liz_dl_cust
+b1_c5_dl_cust_min_kb: $b1_liz_dl_cust
+b1_c5_dl_cust_max_kb: $b1_liz_dl_cust
+b1_c5_dl_cust_min_mb: $b1_liz_dl_cust
+b1_c5_dl_cust_max_mb: $b1_liz_dl_cust
+## Mobility survey
+b1_c1_ms: 'True'
+b1_c2_ms: 'True'
+b1_c3_ms: 'True'
+b1_c4_ms: 'True'
+b1_c5_ms: 'True'
+b1_f2_ms: 'True'
+## Modul B
+b1_liz_b: $B3 == 1
+## Modul Fx
+b1_fx_a_dl_cust: $B1 == 0 and ($C20 in ['CCF Advanced', 'Print Silber', 'Print Gold'] and $C21 == 'CCF Customized')
+b1_fx_dl_cust_min_customizing: $b1_fx_a_dl_cust
+b1_fx_dl_cust_max_customizing: $b1_fx_a_dl_cust
+b1_fx_dl_cust_min_ef: $b1_fx_a_dl_cust
+b1_fx_dl_cust_max_ef: $b1_fx_a_dl_cust
+b1_fx_dl_cust_pl: $b1_fx_a_dl_cust
+
+
+### B3
+b3_a_ia_adv: '[4, 4, 4][$B3] if $B3 is not None else None'
+b3_a_ia_cust: '[4, 6, 8][$B3] if $B3 is not None else None'
+b3_fx_a_dl_cust: $b3_a_ia_adv
+
+
+### C1
+c1_liz_extrajahre: 1 if $C1 == 0 else 0
+c1_ia_adv_extrajahre: 0.7 if $C1 == 0 else 0
+c1_ia_cust_extrajahre: 0.8 if $C1 == 0 else 0
+
+
+### C10
+c10_c1_ia_cust_min_ef: $C10 * 1.5 if $C10 is not None else 0
+c10_c1_ia_cust_max_ef: $C10 * 2.5 if $C10 is not None else 0
+
+
+### C7 (& C8)
+c7_num_clust: '20'
+c7_clusters_yes: '[0, 10, $c7_num_clust, $c7_num_clust, $c7_num_clust, $c7_num_clust, $c7_num_clust, $c7_num_clust]'
+c7_clusters_no: '[0, 10, 20, 35, 60, 100, 125, 125]'
+c7_clusters_actual: $c7_clusters_yes if $C8 == 0 else $c7_clusters_no
+c7_helfer_4_c1_ia_cust_min_schatzung_customizing_tool: '[0, 0.5, 1, 1.5, 4, 7, 8, 8]'
+c7_helfer_5_c1_ia_cust_max_schatzung_customizing_tool: '[0, 1, 2, 2.5, 5, 8, 9, 9]'
+c7_helfer_6_c1_ia_cust_min_schatzung_customizing_tool: '[0, 0.5, 1, 1, 1, 1, 1, 1]'
+c7_helfer_7_c1_ia_cust_max_schatzung_customizing_tool: '[0, 1, 2, 2, 2, 2, 2, 2]'
+c7_c1_ia_cust_min_schatzung_customizing_tool: |
+  0 if $C7 is None else \
+  $c7_helfer_6_c1_ia_cust_min_schatzung_customizing_tool[$C7] if $C8 == 0 else \
+  $c7_helfer_4_c1_ia_cust_min_schatzung_customizing_tool[$C7]
+c7_c1_ia_cust_max_schatzung_customizing_tool: |
+  0 if $C7 is None else \
+  $c7_helfer_7_c1_ia_cust_max_schatzung_customizing_tool[$C7] if $C8 == 0 else \
+  $c7_helfer_5_c1_ia_cust_max_schatzung_customizing_tool[$C7]
+c7_c1_ia_cust_min_zu_berechnende_efs: |
+  0 if $C7 is None or $C10 is None else \
+  max(0, $c7_clusters_actual[$C7] - $C10) if $C7 in [0, 1, 2] else \
+  c7_clusters_actual[$C7] if $C8 == 0 else \
+  max(0, $c7_clusters_actual[$C7] - $C10)
+c7_c1_ia_cust_min_ef: 0.25*$c7_c1_ia_cust_min_zu_berechnende_efs
+c7_c1_ia_cust_max_zu_berechnende_efs: $c7_c1_ia_cust_min_zu_berechnende_efs
+c7_c1_ia_cust_max_ef: 0.5*$c7_c1_ia_cust_max_zu_berechnende_efs
+c7_skalierung_c4_ia: round($c7_clusters_actual[$C7]/60 * 4, 0) if $C7 is not None else 0
+c7_skalierung_c4_dl: $c7_skalierung_c4_ia
+c7_fx_dl_cust_min_ef: $c7_c1_ia_cust_min_ef
+c7_fx_dl_cust_max_ef: $c7_c1_ia_cust_max_ef
+
+
+### C4
+c4_ec_basis_lizenz_adv: 650 + 50*$C4 if $C4 is not None else 0
+c4_s3_basis_lizenz_adv: 850 if $C4 is not None else 0
+c4_s3_standort_lizenz_adv: $const_table_c4_s3_standort_lizenz_adv[$C4] if $C4 is not None else 0
+c4_s3_externe_kosten_lizenz_adv: 50 + 25*$C4 if $C4 is not None else 0
+c4_liz_ia_adv: |
+  $c4_s3_basis_lizenz_adv + $c4_s3_standort_lizenz_adv if $Z4 == 0 else \
+  $c4_ec_basis_lizenz_adv if $Z4 == 1 else \
+  0
+c4_liz_dl_adv: |
+  $c4_s3_basis_lizenz_adv + $c4_s3_standort_lizenz_adv if $Z4 == 0 else \
+  $c4_ec_basis_lizenz_adv if $Z4 == 1 else \
+  0
+c4_liz_ia_print_bronze: 780 + 700*$C4 if $C4 is not None else 0
+c4_liz_dl_print_bronze: $c4_liz_ia_print_bronze
+c4_liz_ia_print_silber: 150*$C4 if $C4 is not None else 0
+c4_liz_dl_print_silber: $c4_liz_ia_print_silber
+c4_liz_ia_print_gold: 400*$C4 if $C4 is not None else 0
+c4_liz_dl_print_gold: $c4_liz_ia_print_gold
+fn_c1_ia_adv_tool: 'lambda x: 0.25*(x + 1) if x is not None else 0' # This value needs to be a function because it is referred to by others but with different number of locations (e.g. C6)
+c4_c1_ia_adv_tool: $fn_c1_ia_adv_tool($C4)
+c4_c1_ia_adv_ef: '0'
+c4_c1_ia_events: 0.25 * ($C4 - 1) if $C4 is not None else 0
+c4_c2_ia_adv: 1.5 if $C4 is not None else 0
+c4_support_ia_adv: 1 if $C4 is not None else 0
+c4_modellierung_ia_adv: 0.5 * ($C4 + 1) if $C4 is not None else 0
+c4_c3_ia_adv: $c4_support_ia_adv + $c4_modellierung_ia_adv
+c4_c3_ia_hotels: 1 + 0.5*$C4 if $C4 is not None else 0
+c4_c3_ia_events: -0.75 + 2.75*$C4 if $C4 is not None else 0
+c4_c3_ia_print_silber: 0.25*$C4 if $C4 is not None else 0
+c4_c3_ia_print_gold: 0.25*($C4 + 1) if $C4 is not None else 0
+c4_c4_ia_adv: |
+  0 if $C4 is None else \
+  1.25 + 0.75*$C4 if $C4 <= 25 else \
+  20 + 1*($C4 - 25)
+c4_c4_ia_hotels: 0.75 + 0.25*$C4 if $C4 is not None else 0
+c4_c4_ia_events: -0.25 + 1.25*$C4 if $C4 is not None else 0
+c4_c4_ia_print_silber: 0.25*($C4 - 1) if $C4 is not None else 0
+c4_c4_ia_print_gold: 0.25*($C4 + 1) if $C4 is not None else 0
+c4_c5_ia_adv: |
+  0 if $C4 is None else \
+  1.75 + 0.25*$C4 if $C4 <= 25 else \
+  8
+c4_c5_ia_hotels: 0.25*($C4 + 1) if $C4 is not None else 0
+c4_c5_ia_events: 1.75*($C4 - 1) if $C4 is not None else 0
+c4_c5_ia_print_silber: 0.25*$C4 if $C4 is not None else 0
+c4_c5_ia_print_gold: 1*($C4 + 1) if $C4 is not None else 0
+c4_c1_dl_adv_tool: $c4_c1_ia_adv_tool
+c4_c1_dl_adv_ef: $c4_c1_ia_adv_ef
+c4_c1_dl_events: 0.25*($C4 - 1) if $C4 is not None else 0
+c4_c2_dl_adv: $c4_c2_ia_adv
+c4_support_dl_adv: 1 if $C4 is not None else 0
+c4_modellierung_dl_adv: 0.5*($C4 + 1) if $C4 is not None else 0
+c4_c3_dl_adv: $c4_support_dl_adv + $c4_modellierung_dl_adv
+c4_c3_dl_hotels: 1 + 0.5*$C4 if $C4 is not None else 0
+c4_c3_dl_events: -0.75 + 2.75*$C4 if $C4 is not None else 0
+c4_c3_dl_print_silber: 0.25*$C4 if $C4 is not None else 0
+c4_c3_dl_print_gold: 0.24*($C4 + 1) if $C4 is not None else 0
+c4_c4_dl_adv: |
+  0 if $C4 is None else \
+  1.25 + 0.75*$C4 if $C4 <= 25 else \
+  20 + 0.5*($C4 - 25)
+c4_c4_dl_hotels: 0.75 + 0.25*$C4 if $C4 is not None else 0
+c4_c4_dl_events: -0.25 + 1.25*$C4 if $C4 is not None else 0
+c4_c4_dl_print_silber: 0.25*($C4 - 1) if $C4 is not None else 0
+c4_c4_dl_print_gold: 0.5*$C4 if $C4 is not None else 0
+c4_c5_dl_adv: |
+  0 if $C4 is None else \
+  1.75 + 0.25*$C4 if $C4 <= 25 else \
+  8
+c4_c5_dl_hotels: 0.25*($C4 + 1) if $C4 is not None else 0
+c4_c5_dl_events: 1.75*($C4 - 1) if $C4 is not None else 0
+c4_c5_dl_print_silber: 0.25*$C4 if $C4 is not None else 0
+c4_c5_dl_print_gold: 1*($C4 + 1) if $C4 is not None else 0
+c4_ec_basis_lizenz_cust: 650 + 50*$C4 if $C4 is not None else 0
+c4_s3_basis_lizenz_cust: '850'
+c4_s3_standort_lizenz_cust: $const_table_c4_s3_standort_lizenz_cust[$C4] if $C4 is not None else 0
+c4_s3_externe_kosten_lizenz_cust: 100 + 50*$C4 if $C4 is not None else 0
+c4_liz_ia_cust: | # Formula does not match excel starting from 2 locations
+  $c4_s3_basis_lizenz_cust + $c4_s3_standort_lizenz_cust if $Z4 == 0 else \
+  $c4_ec_basis_lizenz_cust if $Z4 == 1 else \
+  0
+c4_liz_dl_cust: |
+  $c4_s3_basis_lizenz_cust + $c4_s3_standort_lizenz_cust if $Z4 == 0 else \
+  $c4_ec_basis_lizenz_cust if $Z4 == 1 else \
+  0
+fn_c1_ia_cust_tool: |
+  lambda x: 0 if x is None else \
+  0.75 if x <= 5 else \
+  1.5 if x <= 25 else \
+  3.5 if x <= 45 else \
+  4.5
+c4_c1_ia_cust_tool: $fn_c1_ia_cust_tool($C4)
+c4_c1_ia_cust_min_customizing: $c7_c1_ia_cust_min_schatzung_customizing_tool + 2 if $C7 is not None else 0
+c4_c1_ia_cust_max_customizing: $c7_c1_ia_cust_max_schatzung_customizing_tool + 4 if $C7 is not None else 0
+c4_c1_ia_cust_max_pl: 3.875 + 0.125*$C4 if $C4 is not None else 0
+c4_c1_ia_cust_min_pl: 0.5*$c4_c1_ia_cust_max_pl
+c4_c2_ia_cust_min: '2'
+c4_c2_ia_cust_max: '4'
+# Formula does not match excel starting from 6 locations
+c4_support_c3_ia_cust: 1*($C4 + 1) if $C4 is not None else 0
+c4_modellierung_c3_ia_cust: 2*$C4 if $C4 is not None else 0 
+c4_c3_ia_cust: $c4_support_c3_ia_cust + $c4_modellierung_c3_ia_cust
+c4_basisaw_c4_ia_cust: 4 + 2*$C4 if $C4 is not None else 0
+c4_c4_ia_cust_min: $c4_basisaw_c4_ia_cust + $c7_skalierung_c4_ia
+c4_c4_ia_cust_max: $c4_c4_ia_cust_min + 8
+c4_c5_ia_cust_min: |
+  0 if $C4 is None else \
+  3.5 + 0.5*$C4 if $C4 < 10 else \
+  8
+c4_c5_ia_cust_max: |
+  0 if $C4 is None else \
+  7.5 + 0.5*$C4 if $C4 <= 16 else \
+  16
+c4_c1_dl_cust_tool: 0.75*$c4_c1_ia_adv_tool
+c4_c1_dl_cust_max_pl: '0'
+c4_c1_dl_cust_min_pl: 0.5*$c4_c1_dl_cust_max_pl
+c4_c2_dl_cust_min: '2'
+c4_c2_dl_cust_max: '4'
+# Formula does not match excel starting from 6 locations
+c4_support_c3_dl_cust: 1*($C4 + 1) if $C4 is not None else 0
+# Formula does not match excel starting from 12 locations
+c4_modellierung_c3_dl_cust: 2*$C4 if $C4 is not None else 0
+c4_c3_dl_cust: $c4_support_c3_dl_cust + $c4_modellierung_c3_dl_cust
+c4_basisaw_c4_dl_cust: 4 + 2*$C4 if $C4 is not None else 0
+c4_c4_dl_cust_min: $c4_basisaw_c4_dl_cust + $c7_skalierung_c4_dl
+c4_c4_dl_cust_max: $c4_c4_dl_cust_min + 8
+c4_c5_dl_cust_min: |
+  0 if $C4 is None else \
+  3.5 + 0.5*$C4 if $C4 <= 8 else \
+  8
+c4_c5_dl_cust_max: |
+  0 if $C4 is None else \
+  7.5 + 0.5*$C4 if $C4 <= 16 else \
+  16
+c4_c1_ms: $const_table_c4_c1_ms[$C4] if $C4 is not None else 0
+c4_c2_ms: '0.5'
+c4_c3_ms: '0.25'
+c4_c4_ms: $const_table_c4_c4_ms[$C4] if $C4 is not None else 0
+c4_c5_ms: $const_table_c4_c5_ms[$C4] if $C4 is not None else 0
+c4_f2_ms: $c4_c1_ms + $c4_c2_ms + $c4_c3_ms + $c4_c4_ms + $c4_c5_ms  
+c4_fx_dl_cust_min_customizing: $c4_c1_ia_cust_min_customizing
+c4_fx_dl_cust_max_customizing: $c4_c1_ia_cust_max_customizing
+c4_fx_dl_cust_pl: $c4_c1_ia_cust_min_pl
+c4_liz_b: |
+  0 if $C20 is None else \
+  $c4_liz_ia_cust if $C20 == 'CCF Customized' else \
+  $c4_liz_ia_adv
+
+
+### C2
+c2_liz_extrajahre: $c4_liz_b * $C2 if $C2 is not None else 0
+c2_ia_adv_extrajahre: $C2 or 0
+c2_ia_cust_extrajahre: $c2_ia_adv_extrajahre
+
+
+### C6
+c6_multiplier: '[3, 6, 10][$C6] if $C6 is not None else None'
+c6_multiplier_cust: '[2, 4, 7][$C6] if $C6 is not None else None'
+c6_liz_ia_adv: |
+  0 if $C6 is None or $Z4 is None else \
+  $const_table_c4_s3_standort_lizenz_adv[$c6_multiplier] if $Z4 == 0 else \
+  $c6_multiplier * 50
+c6_liz_dl_adv: $c6_liz_ia_adv
+c6_c1_ia_adv_tool: $fn_c1_ia_adv_tool($c6_multiplier)
+c6_c5_ia_adv: '0'
+c6_c1_dl_adv_tool: $c6_c1_ia_adv_tool
+c6_c5_dl_adv: '0'
+# Formula does not match excel
+c6_liz_ia_cust:  |
+  0 if $C6 is None or $Z4 is None else \
+  $const_table_c4_s3_standort_lizenz_cust[$c6_multiplier] if $Z4 == 0 else \
+  $c6_multiplier * 50
+c6_liz_dl_cust: $c6_liz_ia_cust
+c6_c1_ia_cust_tool: $fn_c1_ia_cust_tool($c6_multiplier_cust)
+c6_c5_ia_cust_min: '[2, 4, 8][$C6] if $C6 is not None else 0'
+c6_c5_ia_cust_max: '[3, 5, 9][$C6] if $C6 is not None else 0'
+c6_c1_dl_cust_tool: 0.75*$fn_c1_ia_adv_tool($c6_multiplier_cust)
+c6_c5_dl_cust_min: '[2, 4, 8][$C6] if $C6 is not None else 0'
+c6_c5_dl_cust_max: '[3, 5, 9][$C6] if $C6 is not None else 0'
+
+
+### C9
+# Missing data?
+c9_c1_ia_cust_min_kategorisierung: '0'
+c9_c1_ia_cust_max_kategorisierung: $c9_c1_ia_cust_min_kategorisierung 
+c9_c1_dl_cust_min_kategorisierung: $c9_c1_ia_cust_min_kategorisierung
+c9_c1_dl_cust_max_kategorisierung: $c9_c1_ia_cust_min_kategorisierung
+
+
+### C11
+c11_c1_ia_adv_tool: '[0, 1, 2][$C11] if $C11 is not None else 0'
+c11_c1_dl_adv_tool: '0'
+c11_c1_ia_cust_tool: $c11_c1_ia_adv_tool
+c11_c1_dl_cust_tool: $c11_c1_dl_adv_tool
+
+
+### C12
+c12_c1_ms: 1 if $C12 == 0 else 0
+c12_c2_ms: $c12_c1_ms
+c12_c3_ms: $c12_c1_ms
+c12_c4_ms: $c12_c1_ms
+c12_c5_ms: $c12_c1_ms
+c12_f2_ms: $c12_c1_ms
+
+
+### KAM (Z6)
+kam_cmt_team_skalierung_c1_ia_cust: '[0.9, 1, 1.1][$Z6] if $Z6 is not None else 1'
+kam_skalierung_c2_ia_cust: '1'
+kam_skalierung_c3_ia_cust: '[0.8, 1, 1.2][$Z6] if $Z6 is not None else 1'
+kam_skalierung_c4_ia_cust: $kam_skalierung_c3_ia_cust
+kam_skalierung_c5_ia_cust: $kam_skalierung_c3_ia_cust
+kam_cmt_team_skalierung_c1_dl_cust: $kam_cmt_team_skalierung_c1_ia_cust
+kam_skalierung_c2_dl_cust: $kam_skalierung_c2_ia_cust
+kam_skalierung_c3_dl_cust: $kam_skalierung_c3_ia_cust
+kam_skalierung_c4_dl_cust: $kam_skalierung_c3_ia_cust
+kam_skalierung_c5_dl_cust: $kam_skalierung_c3_ia_cust
+
+kam_c1_ia_cust_tool: -1 * (1 - $kam_cmt_team_skalierung_c1_ia_cust) * $c4_c1_ia_cust_tool
+kam_c2_ia_cust_max: -1 * (1 - $kam_skalierung_c2_ia_cust) * $c4_c2_ia_cust_max
+kam_c2_ia_cust_min: -1 * (1 - $kam_skalierung_c2_ia_cust) * $c4_c2_ia_cust_min
+kam_c3_ia_cust: -1 * (1 - $kam_skalierung_c3_ia_cust) * $c4_c3_ia_cust
+kam_c4_ia_cust_max: -1 * (1 - $kam_skalierung_c4_ia_cust) * $c4_c4_ia_cust_max
+kam_c4_ia_cust_min: -1 * (1 - $kam_skalierung_c4_ia_cust) * $c4_c4_ia_cust_min
+kam_c5_ia_cust_max: -1 * (1 - $kam_skalierung_c5_ia_cust) * $c4_c5_ia_cust_max
+kam_c5_ia_cust_min: -1 * (1 - $kam_skalierung_c5_ia_cust) * $c4_c5_ia_cust_min
+kam_c1_dl_cust_tool: -1 * (1 - $kam_cmt_team_skalierung_c1_dl_cust) * $c4_c1_dl_cust_tool
+kam_c2_dl_cust_max: -1 * (1 - $kam_skalierung_c2_dl_cust) * $c4_c2_dl_cust_max
+kam_c2_dl_cust_min: -1 * (1 - $kam_skalierung_c2_dl_cust) * $c4_c2_dl_cust_min
+kam_c3_dl_cust: -1 * (1 - $kam_skalierung_c3_dl_cust) * $c4_c3_dl_cust
+kam_c4_dl_cust_max: -1 * (1 - $kam_skalierung_c4_dl_cust) * $c4_c4_dl_cust_max
+kam_c4_dl_cust_min: -1 * (1 - $kam_skalierung_c4_dl_cust) * $c4_c4_dl_cust_min
+kam_c5_dl_cust_max: -1 * (1 - $kam_skalierung_c5_dl_cust) * $c4_c5_dl_cust_max
+kam_c5_dl_cust_min: -1 * (1 - $kam_skalierung_c5_dl_cust) * $c4_c5_dl_cust_min
+
+
+### C19
+c19_liz_ia_print_gold: |
+  0 if $C19 in [None, 1] else \
+  -1*$c4_liz_ia_print_gold
+c19_c5_ia_print_gold: |
+  0 if $C19 in [None, 1] else \
+  2 if $B4 == 0 or $C16 == 0 else \
+  0
+c19_liz_dl_print_gold: |
+  0 if $C19 in [None, 1] else \
+  -1*$c4_liz_dl_print_gold
+c19_c5_dl_print_gold: $c19_c5_ia_print_gold
+
+
+### D8_CCF
+d8_a_ia_cust: |
+  (1 if $C20 == 'CCF Customized' else 0) if $D8 == 0 else \
+  1
+d8_fx_dl_cust: |
+  (4 if $C20 == 'CCF Advanced' and $C21 == 'CCF Customized' else 0) if $D8 == 0 else \
+  0 if $D8 == 1 else \
+  1 
+
+
+### C17
+c17_c4_ia_cust_min_flag: 6 if $C17 == 0 else 0
+c17_c4_ia_cust_max_flag: 6.5 if $C17 == 0 else 0
+c17_c4_dl_cust_min_flag: $c17_c4_ia_cust_min_flag
+c17_c4_dl_cust_max_flag: $c17_c4_ia_cust_max_flag
+
+
+### D7_CCF
+d7_c4_ia_cust_min_flag: 6 if $C17 is None and $D7 == 0 else 0
+d7_c4_ia_cust_max_flag: 6.5 if $C17 is None and $D7 == 0 else 0
+d7_c4_dl_cust_min_flag: $d7_c4_ia_cust_min_flag
+d7_c4_dl_cust_max_flag: $d7_c4_ia_cust_max_flag
+
+
+### B8
+b8_c5_ia_cust_min: 2 if $B8 == 0 and ($B4 == 0 or $C16 == 0) else 0
+b8_c5_dl_cust_min: $b8_c5_ia_cust_min
+
+
+### C14
+c14_c5_ia_adv_kb: 16 if $C14 == 0 else 0
+c14_c5_dl_adv_kb: 12 if $C14 == 0 else 0
+c14_c5_ia_cust_min_kb: 16 if $C14 == 0 else 0
+c14_c5_ia_cust_max_kb: 24 if $C14 == 0 else 0
+c14_c5_dl_cust_min_kb: 12 if $C14 == 0 else 0
+c14_c5_dl_cust_max_kb: 16 if $C14 == 0 else 0
+
+
+### C15
+c15_c5_ia_adv_kb: 4 if $C15 == 0 else 0
+c15_c5_dl_adv_kb: 2 if $C15 == 0 else 0
+c15_c5_ia_cust_min_kb: 16 if $C15 == 0 else 0
+c15_c5_ia_cust_max_kb: 24 if $C15 == 0 else 0
+c15_c5_dl_cust_min_kb: 12 if $C15 == 0 else 0
+c15_c5_dl_cust_max_kb: 16 if $C15 == 0 else 0
+

@@ -1,0 +1,619 @@
+- title: output.summary.title
+  columns: output.summary.columns
+  rows:
+    - data: ["'output.summary.terminology.year1'", "''", "''", "", "", "", "", ""]
+      style: "font-weight: bold; color: white; background-color: #000000"
+    
+    - data: 
+        - "''"
+        - "'A'"
+        - "'output.detailed.A.description'"
+        - $aw_h_a_ia
+        - $fn_htod($aw_h_a_ia)
+        - $fn_htod($aw_h_a_ia)
+        - $fn_htochf($aw_h_a_ia)
+        - $fn_htochf($aw_h_a_ia)
+      style: 'background-color: #BCE8FA'
+    
+    - data: 
+        - "''"
+        - "'B'"
+        - "'output.detailed.B.description'"
+        - ""
+        - ""
+        - ""
+        - $daily_rate
+        - $daily_rate
+      style: 'background-color: #CBCBCB'
+    
+    - data: 
+        - "''"
+        - "'C'"
+        - "'output.detailed.C.description'"
+        - $aw_h_total_c_min
+        - $aw_d_total_c_min
+        - $aw_d_total_c_max
+        - $aw_chf_total_c_min
+        - $aw_chf_total_c_max
+      style: 'background-color: #FFAAD2'
+    
+    - data: 
+        - "''"
+        - "'PL'"
+        - "'output.summary.PL.description'"
+        - $aw_h_pl_min
+        - $aw_d_pl_min
+        - $aw_d_pl_max
+        - $aw_chf_pl_min
+        - $aw_chf_pl_max
+      style: 'background-color: #EAEAEA'
+
+    - data:
+        - "'output.summary.terminology.year1_services'"
+        - "''"
+        - "''"
+        - $aw_h_year1_services_min
+        - $aw_d_year1_services_min
+        - $aw_d_year1_services_max
+        - $aw_chf_year1_services_min
+        - $aw_chf_year1_services_max
+      style: "font-weight: bold; color: white; background-color: #737373"
+    
+    - data:
+        - "'output.summary.terminology.year1_licenses'"
+        - ""
+        - ""
+        - ""
+        - ""
+        - ""
+        - "$aw_chf_year1_licences_min"
+        - "$aw_chf_year1_licences_max"
+      style: "font-weight: bold; color: white; background-color: #737373"
+    
+    - data:
+        - "'output.summary.terminology.year1_solution'"
+        - ""
+        - ""
+        - ""
+        - ""
+        - ""
+        - "$aw_chf_year1_solution_min"
+        - "$aw_chf_year1_solution_max"
+      style: "font-weight: bold; color: white; background-color: #737373"
+    
+    - data:
+        - "'output.summary.terminology.year1_addons'"
+        - ""
+        - ""
+        - ""
+        - ""
+        - ""
+        - $daily_rate
+        - $daily_rate
+      style: "font-weight: bold; color: white; background-color: #737373"
+
+    - data: ["'output.summary.terminology.subsequent_years'", "''", "''", "", "", "", "", ""]
+      style: "font-weight: bold; color: white; background-color: #000000"
+    
+    - data: 
+        - "''"
+        - "'F'"
+        - "'output.detailed.F.description'"
+        - $aw_h_total_f_min
+        - $aw_d_total_f_min
+        - $aw_d_total_f_max
+        - $aw_chf_total_f_min
+        - $aw_chf_total_f_max
+      style: 'background-color: #ECFDBF'
+    
+    - data: 
+        - "''"
+        - "'F2'"
+        - "'output.detailed.F2.description'"
+        - $aw_h_total_f2_min
+        - $aw_d_total_f2_min
+        - $aw_d_total_f2_max
+        - $aw_chf_total_f2_min
+        - $aw_chf_total_f2_max
+      style: 'background-color: white'
+    
+    - data: 
+        - "''"
+        - "'Fx'"
+        - "'output.detailed.Fx.description'"
+        - $aw_h_f_fx_min
+        - $fn_htod($aw_h_f_fx_min)
+        - $fn_htod($aw_h_f_fx_max)
+        - $fn_htochf($aw_h_f_fx_min)
+        - $fn_htochf($aw_h_f_fx_max)
+      style: 'background-color: white'
+    
+    - data: 
+        - "''"
+        - "'PL'"
+        - "'output.summary.PL.description'"
+        - $aw_h_pl_dl_min
+        - $aw_d_pl_dl_min
+        - $aw_d_pl_dl_max
+        - $aw_chf_pl__dl_min
+        - $aw_chf_pl_dl_max
+      style: 'background-color: #EAEAEA'
+    
+    - data:
+        - "'output.summary.terminology.subsequent_years_services'"
+        - "''"
+        - "''"
+        - $aw_h_subseq_services_min
+        - $aw_d_subseq_services_min
+        - $aw_d_subseq_services_max
+        - $aw_chf_subseq_services_min
+        - $aw_chf_subseq_services_max
+      style: "font-weight: bold; color: white; background-color: #737373"
+    
+    - data:
+        - "'output.summary.terminology.subsequent_years_licenses'"
+        - "''"
+        - "''"
+        - ""
+        - ""
+        - ""
+        - $aw_chf_subseq_licences_min
+        - $aw_chf_subseq_licences_max
+      style: "font-weight: bold; color: white; background-color: #737373"
+    
+    - data:
+        - "'output.summary.terminology.subsequent_years_solution'"
+        - "''"
+        - "''"
+        - ""
+        - ""
+        - ""
+        - $aw_chf_subseq_solution_min
+        - $aw_chf_subseq_solution_max
+      style: "font-weight: bold; color: white; background-color: #737373"
+    
+    - data:
+        - "'output.summary.terminology.subsequent_years_addons'"
+        - "''"
+        - "''"
+        - ""
+        - ""
+        - ""
+        - $daily_rate
+        - $daily_rate
+      style: "font-weight: bold; color: white; background-color: #737373"
+
+### Detailed
+- title: output.detailed.title
+  columns: output.detailed.columns
+  rows:
+    - data: 
+        - "'A'"
+        - "'output.detailed.A.description'"
+        - $aw_h_a_ia
+        - $fn_htod($aw_h_a_ia)
+        - $fn_htod($aw_h_a_ia)
+        - $fn_htochf($aw_h_a_ia)
+        - $fn_htochf($aw_h_a_ia)
+        - "'output.detailed.A.explanation'"
+      style: 'font-weight: bold; background-color: #BCE8FA'
+    
+    - data: 
+        - "'B'"
+        - "'output.detailed.B.description'"
+        - ""
+        - ""
+        - ""
+        - $daily_rate
+        - $daily_rate
+        - "'output.detailed.B.explanation'"
+      style: 'font-weight: bold; background-color: #CBCBCB'
+    
+    - data: 
+        - "'C'"
+        - "'output.detailed.C.description'"
+        - $aw_h_total_c_min
+        - $aw_d_total_c_min
+        - $aw_d_total_c_max
+        - $aw_chf_total_c_min
+        - $aw_chf_total_c_max
+        - "''"
+      style: 'font-weight: bold; background-color: #FFAAD2'
+    
+    - data: 
+        - "'  C1'"
+        - "'output.detailed.C1_liz.description'"
+        - ""
+        - ""
+        - ""
+        - $aw_chf_c_c1_liz
+        - $aw_chf_c_c1_liz
+        - "'output.detailed.C1_liz.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  C1'"
+        - "'output.detailed.C1_tool.description'"
+        - $aw_h_c_c1_tool_min
+        - $fn_htod($aw_h_c_c1_tool_min)
+        - $fn_htod($aw_h_c_c1_tool_max)
+        - $fn_htochf($aw_h_c_c1_tool_min)
+        - $fn_htochf($aw_h_c_c1_tool_max)
+        - "'output.detailed.C1_liz.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  C1'"
+        - "'output.detailed.C1_ef.description'"
+        - $aw_h_c_c1_ef_min
+        - $fn_htod($aw_h_c_c1_ef_min)
+        - $fn_htod($aw_h_c_c1_ef_max)
+        - $fn_htochf($aw_h_c_c1_ef_min)
+        - $fn_htochf($aw_h_c_c1_ef_max)
+        - "'output.detailed.C1_ef.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  C2'"
+        - "'output.detailed.C2.description'"
+        - $aw_h_c_c2_kickoff_min
+        - $fn_htod($aw_h_c_c2_kickoff_min)
+        - $fn_htod($aw_h_c_c2_kickoff_max)
+        - $fn_htochf($aw_h_c_c2_kickoff_min)
+        - $fn_htochf($aw_h_c_c2_kickoff_max)
+        - "'output.detailed.C2.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  C3'"
+        - "'output.detailed.C3_daten.description'"
+        - $aw_h_c_c3_daten
+        - $fn_htod($aw_h_c_c3_daten)
+        - $fn_htod($aw_h_c_c3_daten)
+        - $fn_htochf($aw_h_c_c3_daten)
+        - $fn_htochf($aw_h_c_c3_daten)
+        - "'output.detailed.C3_daten.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  C3'"
+        - "'output.detailed.C3_extrajahre.description'"
+        - $aw_h_c_c3_extrajahre_min
+        - $fn_htod($aw_h_c_c3_extrajahre_min)
+        - $fn_htod($aw_h_c_c3_extrajahre_max)
+        - $fn_htochf($aw_h_c_c3_extrajahre_min)
+        - $fn_htochf($aw_h_c_c3_extrajahre_max)
+        - "'output.detailed.C3_extrajahre.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  C3'"
+        - "'output.detailed.C3_liz.description'"
+        - ""
+        - ""
+        - ""
+        - $aw_chf_c_c3_liz_extrajahre
+        - $aw_chf_c_c3_liz_extrajahre
+        - "'output.detailed.C3_liz.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  C4'"
+        - "'output.detailed.C4.description'"
+        - $aw_h_c_c4_plaus_min
+        - $fn_htod($aw_h_c_c4_plaus_min)
+        - $fn_htod($aw_h_c_c4_plaus_max)
+        - $fn_htochf($aw_h_c_c4_plaus_min)
+        - $fn_htochf($aw_h_c_c4_plaus_max)
+        - "'output.detailed.C4.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  C5'"
+        - "'output.detailed.C5_abschluss.description'"
+        - $aw_h_c_c5_abschluss_min
+        - $fn_htod($aw_h_c_c5_abschluss_min)
+        - $fn_htod($aw_h_c_c5_abschluss_max)
+        - $fn_htochf($aw_h_c_c5_abschluss_min)
+        - $fn_htochf($aw_h_c_c5_abschluss_max)
+        - "'output.detailed.C5_abschluss.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  C5'"
+        - "'output.detailed.C5_kb.description'"
+        - $aw_h_c_c5_kb_min
+        - $fn_htod($aw_h_c_c5_kb_min)
+        - $fn_htod($aw_h_c_c5_kb_max)
+        - $fn_htochf($aw_h_c_c5_kb_min)
+        - $fn_htochf($aw_h_c_c5_kb_max)
+        - "'output.detailed.C5_kb.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  C5'"
+        - "'output.detailed.C5_mb.description'"
+        - $aw_h_c_c5_mb_min
+        - $fn_htod($aw_h_c_c5_mb_min)
+        - $fn_htod($aw_h_c_c5_mb_max)
+        - $fn_htochf($aw_h_c_c5_mb_min)
+        - $fn_htochf($aw_h_c_c5_mb_max)
+        - "'output.detailed.C5_mb.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  C5'"
+        - "'output.detailed.C5_flag.description'"
+        - $aw_h_c_c5_flag_min
+        - $fn_htod($aw_h_c_c5_flag_min)
+        - $fn_htod($aw_h_c_c5_flag_max)
+        - $fn_htochf($aw_h_c_c5_flag_min)
+        - $fn_htochf($aw_h_c_c5_flag_max)
+        - "'output.detailed.C5_flag.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  Cx'"
+        - "'output.detailed.Cx_ms.description'"
+        - $aw_h_c_cx_ms
+        - $fn_htod($aw_h_c_cx_ms)
+        - $fn_htod($aw_h_c_cx_ms)
+        - $fn_htochf($aw_h_c_cx_ms)
+        - $fn_htochf($aw_h_c_cx_ms)
+        - "'output.detailed.Cx_ms.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  Cx'"
+        - "'output.detailed.Cx_kat.description'"
+        - ""
+        - ""
+        - ""
+        - $daily_rate
+        - $daily_rate
+        - "'output.detailed.Cx_ms.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  Cx'"
+        - "'output.detailed.Cx_audit.description'"
+        - ""
+        - ""
+        - ""
+        - $daily_rate
+        - $daily_rate
+        - "'output.detailed.Cx_audit.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  Cx'"
+        - "'output.detailed.Cx_liz_print.description'"
+        - ""
+        - ""
+        - ""
+        - $aw_chf_c_cx_liz_print
+        - $aw_chf_c_cx_liz_print
+        - "'output.detailed.Cx_liz_print.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'  Cx'"
+        - "'output.detailed.Cx_review.description'"
+        - ""
+        - ""
+        - ""
+        - $daily_rate
+        - $daily_rate
+        - "'output.detailed.Cx_review.explanation'"
+      style: 'background-color: #FFD5E9'
+    
+    - data: 
+        - "'F'"
+        - "'output.detailed.F.description'"
+        - $aw_h_total_f_min
+        - $aw_d_total_f_min
+        - $aw_d_total_f_max
+        - $aw_chf_total_f_min
+        - $aw_chf_total_f_max
+        - "'output.detailed.F.explanation'"
+      style: 'font-weight: bold; background-color: #D9FB80'
+    
+    - data: 
+        - "'  F1'"
+        - "'output.detailed.F1.description'"
+        - $aw_h_f_f1_min
+        - $fn_htod($aw_h_f_f1_min)
+        - $fn_htod($aw_h_f_f1_max)
+        - $fn_htochf($aw_h_f_f1_min)
+        - $fn_htochf($aw_h_f_f1_max)
+        - "'output.detailed.F1.explanation'"
+      style: 'background-color: #ECFDBF'
+    
+    - data: 
+        - "'  F2'"
+        - "'output.detailed.F1.description'"
+        - $aw_h_total_f2_min
+        - $aw_d_total_f2_min
+        - $aw_d_total_f2_max
+        - $aw_chf_total_f2_min
+        - $aw_chf_total_f2_max
+        - "'output.detailed.F1.explanation'"
+      style: 'background-color: #ECFDBF'
+
+    - data: 
+        - "'    F2 C1'"
+        - "'output.detailed.F2_C1_liz.description'"
+        - ""
+        - ""
+        - ""
+        - $aw_chf_c_c1_dl_liz
+        - $aw_chf_c_c1_dl_liz
+        - "'output.detailed.F2_C1_liz.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'    F2 C1'"
+        - "'output.detailed.F2_C1_tool.description'"
+        - $aw_h_c_c1_dl_tool_min
+        - $fn_htod($aw_h_c_c1_dl_tool_min)
+        - $fn_htod($aw_h_c_c1_dl_tool_max)
+        - $fn_htochf($aw_h_c_c1_dl_tool_min)
+        - $fn_htochf($aw_h_c_c1_dl_tool_max)
+        - "'output.detailed.F2_C1_tool.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'    F2 C2'"
+        - "'output.detailed.F2_C2.description'"
+        - $aw_h_c_c2_dl_kickoff_min
+        - $fn_htod($aw_h_c_c2_dl_kickoff_min)
+        - $fn_htod($aw_h_c_c2_dl_kickoff_max)
+        - $fn_htochf($aw_h_c_c2_dl_kickoff_min)
+        - $fn_htochf($aw_h_c_c2_dl_kickoff_max)
+        - "'output.detailed.F2_C2.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'    F2 C3'"
+        - "'output.detailed.F2_C3_daten.description'"
+        - $aw_h_c_c3_dl_daten_min
+        - $fn_htod($aw_h_c_c3_dl_daten_min)
+        - $fn_htod($aw_h_c_c3_dl_daten_max)
+        - $fn_htochf($aw_h_c_c3_dl_daten_min)
+        - $fn_htochf($aw_h_c_c3_dl_daten_max)
+        - "'output.detailed.F2_C3_daten.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'    F2 C4'"
+        - "'output.detailed.F2_C4.description'"
+        - $aw_h_c_c4_dl_plaus_min
+        - $fn_htod($aw_h_c_c4_dl_plaus_min)
+        - $fn_htod($aw_h_c_c4_dl_plaus_max)
+        - $fn_htochf($aw_h_c_c4_dl_plaus_min)
+        - $fn_htochf($aw_h_c_c4_dl_plaus_max)
+        - "'output.detailed.F2_C4.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'    F2 C5'"
+        - "'output.detailed.F2_C5_abschluss.description'"
+        - $aw_h_c_c5_dl_abschluss_min
+        - $fn_htod($aw_h_c_c5_dl_abschluss_min)
+        - $fn_htod($aw_h_c_c5_dl_abschluss_max)
+        - $fn_htochf($aw_h_c_c5_dl_abschluss_min)
+        - $fn_htochf($aw_h_c_c5_dl_abschluss_max)
+        - "'output.detailed.F2_C5_abschluss.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'    F2 C5'"
+        - "'output.detailed.F2_C5_kb.description'"
+        - $aw_h_c_c5_dl_kb_min
+        - $fn_htod($aw_h_c_c5_dl_kb_min)
+        - $fn_htod($aw_h_c_c5_dl_kb_max)
+        - $fn_htochf($aw_h_c_c5_dl_kb_min)
+        - $fn_htochf($aw_h_c_c5_dl_kb_max)
+        - "'output.detailed.F2_C5_kb.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'    F2 C5'"
+        - "'output.detailed.F2_C5_mb.description'"
+        - $aw_h_c_c5_dl_mb_min
+        - $fn_htod($aw_h_c_c5_dl_mb_min)
+        - $fn_htod($aw_h_c_c5_dl_mb_max)
+        - $fn_htochf($aw_h_c_c5_dl_mb_min)
+        - $fn_htochf($aw_h_c_c5_dl_mb_max)
+        - "'output.detailed.F2_C5_mb.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'    F2 C5'"
+        - "'output.detailed.F2_C5_flag.description'"
+        - $aw_h_c_c5_dl_flag_min
+        - $fn_htod($aw_h_c_c5_dl_flag_min)
+        - $fn_htod($aw_h_c_c5_dl_flag_max)
+        - $fn_htochf($aw_h_c_c5_dl_flag_min)
+        - $fn_htochf($aw_h_c_c5_dl_flag_max)
+        - "'output.detailed.F2_C5_flag.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'    F2 Cx'"
+        - "'output.detailed.F2_Cx_ms.description'"
+        - $aw_h_c_cx_dl_ms_min
+        - $fn_htod($aw_h_c_cx_dl_ms_min)
+        - $fn_htod($aw_h_c_cx_dl_ms_max)
+        - $fn_htochf($aw_h_c_cx_dl_ms_min)
+        - $fn_htochf($aw_h_c_cx_dl_ms_max)
+        - "'output.detailed.F2_Cx_ms.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'    F2 Cx'"
+        - "'output.detailed.F2_Cx_kat.description'"
+        - ""
+        - ""
+        - ""
+        - $daily_rate
+        - $daily_rate
+        - "'output.detailed.F2_Cx_ms.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'    F2 Cx'"
+        - "'output.detailed.F2_Cx_audit.description'"
+        - ""
+        - ""
+        - ""
+        - $daily_rate
+        - $daily_rate
+        - "'output.detailed.F2_Cx_audit.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'   F2 Cx'"
+        - "'output.detailed.F2_Cx_liz_print.description'"
+        - ""
+        - ""
+        - ""
+        - $aw_chf_c_cx_dl_liz_print
+        - $aw_chf_c_cx_dl_liz_print
+        - "'output.detailed.F2_Cx_liz_print.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'    F2 Cx'"
+        - "'output.detailed.F2_Cx_review.description'"
+        - $aw_h_c_cx_dl_review_min
+        - $fn_htod($aw_h_c_cx_dl_review_min)
+        - $fn_htod($aw_h_c_cx_dl_review_max)
+        - $fn_htochf($aw_h_c_cx_dl_review_min)
+        - $fn_htochf($aw_h_c_cx_dl_review_max)
+        - "'output.detailed.F2_Cx_review.explanation'"
+      style: 'background-color: white'
+    
+    - data: 
+        - "'  F3'"
+        - "'output.detailed.F3.description'"
+        - ""
+        - ""
+        - ""
+        - $daily_rate
+        - $daily_rate
+        - "'output.detailed.F3.explanation'"
+      style: 'background-color: #ECFDBF'
+    
+    - data: 
+        - "'  Fx'"
+        - "'output.detailed.Fx.description'"
+        - $aw_h_f_fx_min
+        - $fn_htod($aw_h_f_fx_min)
+        - $fn_htod($aw_h_f_fx_max)
+        - $fn_htochf($aw_h_f_fx_min)
+        - $fn_htochf($aw_h_f_fx_max)
+        - "'output.detailed.Fx.explanation'"
+      style: 'background-color: #ECFDBF'
+    
+    
