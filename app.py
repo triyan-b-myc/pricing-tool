@@ -110,7 +110,7 @@ for var_name in logic:
 col1, col2, col3 = st.columns([3, 3, 1])
 with col1: st.metric(t("ui.C20.title"), qdata.get("C20"), help=t("ui.C20.description"))
 with col2: st.metric(t("ui.C21.title"), qdata.get("C21"), help=t("ui.C21.description"))
-with col3: st.metric("Margin Year 1 (CHF)", qdata.get("margin_year1"))
+with col3: st.metric(t("ui.margin_year1.title"), qdata.get("margin_year1"))
 
 with st.expander(t("ui.data_explorer.title")):
     st.write(t("ui.data_explorer.description"))
