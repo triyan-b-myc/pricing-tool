@@ -281,4 +281,6 @@ aw_chf_subseq_licences_max: $aw_chf_subseq_licences_min
 aw_chf_subseq_solution_min: $aw_chf_subseq_services_min + $aw_chf_subseq_licences_min
 aw_chf_subseq_solution_max: $aw_chf_subseq_services_max + $aw_chf_subseq_licences_max
 
-margin_year1: $aw_chf_year1_solution_min - ($aw_d_year1_services_min * $const_hours_per_workday + $Z7) * $const_internal_hourly_rate
+margin_year1: | 
+  None if $C20 is None else \
+  $aw_chf_year1_solution_min - ($aw_d_year1_services_min * $const_hours_per_workday + $Z7) * $const_internal_hourly_rate

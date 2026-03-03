@@ -1,0 +1,16 @@
+ui:
+  language: 
+    title: Sprachauswahl
+  data_explorer:
+    title: Datenexplorer
+    col_value: "Wert"
+    col_expr: "Ausdruck"
+    description: Zur Überprüfung aller Variablen und Logik.
+  C20:
+    title: CCF Lösung Initialjahr
+    description: Basierend auf den erfassten Informationen wird hier automatisch ausgegeben, welche CCF Lösung im Initialjahr (erstes Jahr der Zusammenarbeit per Offerte)angeboten werden sollte.
+  C21: 
+    title: CCF Lösung Folgejahre
+    description: Basierend auf den erfassten Informationen wird hier automatisch ausgegeben, welche CCF Lösung in den Folgejahren ab Jahr 2 angeboten werden sollte.
+  margin_year1:
+    title: Marge Jahr 1 (CHF)

@@ -1,9 +1,10 @@
 import yaml
-import os
+from pathlib import Path
+from collections import defaultdict
 import re
 import math
 
-TRANSLATIONS = {}
+TRANSLATIONS = defaultdict(dict)
 APP_LANGUAGES = set()
 
 def read_yaml(path) -> dict:
@@ -11,12 +12,12 @@ def read_yaml(path) -> dict:
         return next(yaml.safe_load_all(f))
 
 def load_translations():
-    translations_dir = "translations"
-    for filename in os.listdir(translations_dir):
-        if not filename.endswith(".yaml"):
-            continue
-        lang = filename.split(".")[0]
-        TRANSLATIONS[lang] = read_yaml(f"{translations_dir}/{filename}")
+    lang_folders = [p for p in Path("translations").iterdir() if p.is_dir()]
+    for lf in lang_folders:
+        for f in lf.iterdir():
+            if not f.name.endswith(".yaml"):
+                continue
+            TRANSLATIONS[lf.name].update(read_yaml(f))
     APP_LANGUAGES.update(TRANSLATIONS.keys())
 
 def translate(path:str, lang): 
@@ -41,13 +42,47 @@ def load_pricing_logic() -> dict:
 def load_output_tables() -> dict:
     return read_yaml("output/tables.yaml")
 
-def evaluate_expr(expr, qdata):
+# Safe built-in functions for expressions
+SAFE_BUILTINS = {
+    "abs": abs,
+    "all": all,
+    "any": any,
+    "bool": bool,
+    "dict": dict,
+    "enumerate": enumerate,
+    "filter": filter,
+    "float": float,
+    "int": int,
+    "len": len,
+    "list": list,
+    "map": map,
+    "max": max,
+    "min": min,
+    "pow": pow,
+    "range": range,
+    "round": round,
+    "sorted": sorted,
+    "str": str,
+    "sum": sum,
+    "tuple": tuple,
+    "zip": zip,
+}
+
+def eval_expr(expr, qdata):
     if expr in [None, ""]:
         return None
     try:
         parsed = re.sub(r"\$([A-Za-z0-9_]+)", rf"qdata.get('\1')", expr)
-        return eval(parsed, {"qdata": qdata, "math": math})
-    except NameError:
-        raise Exception(f"Invalid reference (Did you forget a '$' before the variable name?): {expr}")
+        
+        eval_globals = {
+            "__builtins__": {},
+            "qdata": qdata,
+            "math": math,
+            **SAFE_BUILTINS,
+        }
+        
+        return eval(parsed, eval_globals)
+    except NameError as e:
+        raise Exception(f"{e.args[0]} (Did you forget a '$' before the variable name?): {expr}")
     except Exception as e:
         raise Exception(f"Invalid expression: {expr}, {parsed}, {e}")

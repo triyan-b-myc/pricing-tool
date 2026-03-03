@@ -1,6 +1,8 @@
 import streamlit as st
 import utils.utils as ut
 import pandas as pd
+import os
+import re
 
 #########################
 # Setup
@@ -9,7 +11,7 @@ print("-"*50)
 def init_st():
     st.set_page_config(
         layout="wide",
-        initial_sidebar_state=400,
+        initial_sidebar_state=475,
         page_title="Pricing Tool",
         page_icon=":material/functions:"
     )
@@ -24,11 +26,12 @@ logic = ut.load_pricing_logic()
 
 def t(s): 
     return ut.translate(s, st.session_state.lang)
+
 def t_safe(s):
     try:
         return t(s)
     except:
-        return s
+        return "" if isinstance(s, str) and re.match(r"^[\w_]+(\.[\w_]+)+[\w_]+$", s) else s
 
 qdata:dict = st.session_state.qdata
 
@@ -36,7 +39,8 @@ qdata:dict = st.session_state.qdata
 # Global UI
 #########################
 st.logo("assets/logo.png", size="large", link="https://www.myclimate.org")
-st.button("Reload")
+if os.getenv("MYC_APP_ENV") != "PROD":
+    st.button("Reload", key="debug_reload")
 
 #########################
 # Questionnaire
@@ -56,18 +60,15 @@ with st.sidebar:
         is_empty_section = True
 
         for question_id, question in questionnaire[section_id].items():        
-            if ut.evaluate_expr(question.get("required_if"), qdata) == False:
-                if question_id in qdata:
-                    del qdata[question_id]
+            if ut.eval_expr(question.get("required_if"), qdata) == False:
+                qdata.pop(question_id, None)
                 continue
             is_empty_section = False
 
             qtext = f"{question_id}: {t(f"questionnaire.sections.{section_id}.qs.{question_id}.text")}"
-            try:
-                qhelp = t(f"questionnaire.sections.{section_id}.qs.{question_id}.description")
-            except:
-                qhelp = None
-            
+            try: qhelp = t(f"questionnaire.sections.{section_id}.qs.{question_id}.description")
+            except: qhelp = None
+
             match question["type"]:
                 case "text":
                     value = st.text_input(qtext, value=qdata.get(question_id, ""), help=qhelp)
@@ -104,11 +105,11 @@ with st.sidebar:
 # Logic & display
 #########################
 for var_name in logic:
-    qdata[var_name] = ut.evaluate_expr(logic[var_name], qdata)
+    qdata[var_name] = ut.eval_expr(logic[var_name], qdata)
 
 col1, col2, col3 = st.columns([3, 3, 1])
-with col1: st.metric(t("ui.C20.title"), qdata["C20"], help=t("ui.C20.description"))
-with col2: st.metric(t("ui.C21.title"), qdata["C21"], help=t("ui.C21.description"))
+with col1: st.metric(t("ui.C20.title"), qdata.get("C20"), help=t("ui.C20.description"))
+with col2: st.metric(t("ui.C21.title"), qdata.get("C21"), help=t("ui.C21.description"))
 with col3: st.metric("Margin Year 1 (CHF)", qdata.get("margin_year1"))
 
 with st.expander(t("ui.data_explorer.title")):
@@ -123,7 +124,7 @@ with st.expander(t("ui.data_explorer.title")):
 for table in ut.load_output_tables():
     st.subheader(t(table["title"]))
     df_table = pd.DataFrame(
-        [map(lambda expr: ut.evaluate_expr(expr, qdata), row["data"]) for row in table["rows"] if ut.evaluate_expr(row.get("required_if", 'True'), qdata)],
+        [map(lambda expr: ut.eval_expr(expr, qdata), row["data"]) for row in table["rows"] if ut.eval_expr(row.get("required_if", 'True'), qdata)],
         columns=t(table["columns"])
     )
     df_table = df_table.map(t_safe)

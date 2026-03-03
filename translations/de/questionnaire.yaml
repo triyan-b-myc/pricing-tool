@@ -1,0 +1,187 @@
+questionnaire:
+  title: Pricing Tool Fragebogen
+  description: Alle sichtbaren Fragen sind Pflichtfragen.
+  empty_section: Für diesen Abschnitt gibt es keine Fragen.
+  sections:
+    Z:
+      title: Allgemeine Informationen 
+      qs: 
+        Z1:
+          text: Name Unternehmen
+        Z2:
+          text: Name myclimate CPM
+        Z3:
+          text: myclimate Ländergesellschaft
+        Z4:
+          text: myclimate Tool
+        Z5:
+          text: Anteil Projektmanagement (%)
+        Z6:
+          text: Geschätztes Kundensupportniveau
+        Z7:
+          text: Erwarteter Aufwand bis Vertragsabschluss (h)
+    A:
+      title: "A: Firmenprofil"
+      qs:
+        A1:
+          text: myclimate Branche
+    B:
+      title: "B: myclimate Dienstleistungen"
+      qs:
+        B1:
+          text: Soll ein Corporate Carbon Footprint erstellt werden?
+          description: Der Corporate Carbon Footprint (CCF) ist wichtiger Bestandteil der umfassenden Kundenberatung der Stiftung myclimate. Der Fussabdruck bietet einen Überblick über die Emissionen im Unternehmen und der Wertschöpfungskette. Der CCF ist die Grundlage für die Erarbeitung von Massnahmen, Klimazielen oder der Klimastrategie als Ganzes.
+        B2:
+          text: Soll der Corporate Carbon Footprint alle 3 Scopes vollständig abbilden?
+          description: Allgemein ist ein vollständiger CCF empfohlen. Für eine CSRD Beratung oder eine SBTi-Validierung ist dieser verpflichtend, mit Ausnahme von KMU, die sich ausschliesslich kurzfristige Ziele setzen möchten. Bei Lösungen mit nicht vollständigen Bilanzen (CCF Advanced, CCF Print, Hotel, Events) sind ausserdem keine vertieften Analysen und keine Anpassungen, zusätzlich erfasste Kategorien oder Emissionsfaktoren möglich. 
+        B3:
+          text: Ist bereits ein Corporate Carbon Footprint von einem früheren oder laufenden Jahr vorhanden?
+        B4:
+          text: Wünschen Sie eine SBTi-Beratung?
+          description: myclimate bietet Unterstützung bei der Erarbeitung, Einreichung und Validierung von SBTi-konformen Klimazielen. Die Massnahmenberatung ist im Produkt SBTi Beratung nicht eingeschlossen, kann aber nach Wunsch kombiniert werden.
+        B5:
+          text: Wünschen Sie eine Massnahmen-Beratung?
+          description: myclimate unterstützt beim Festlegen von konkreten Reduktionszielen, der Identifikation von möglichen Hotspots und Verbesserungspotenzialen sowie beim Entwickeln von Massnahmen zur CO2-Reduktion innerhalb der Wertschöpfungskette. Die Basis hierfür bilden bestehende CO2-Bilanzen und Beratungsgespräche. Im Rahmen des Mapping-Workshops wird der Detaillierungsgrad der Massnahmenerarbeitung zusammen mit dem Kunden definiert.
+        B6:
+          text: Wünschen Sie eine CSRD-Beratung?
+          description: Das CSRD-Berichterstattungsprodukt zielt darauf ab, Unternehmen durch die Herausforderungen und Chancen der Corporate Sustainability Reporting Directive (CSRD) zu navigieren. myclimate bietet einen strukturierten, modularen Ansatz zur Integration von Umwelt-, Sozial- und Governance-Kriterien (ESG) in die Kernstrategien von Unternehmen, um nicht nur Compliance zu gewährleisten, sondern auch nachhaltige Werte zu schaffen.
+        B7:
+          text: Wünschen Sie Unterstützung bei CDP-konformer Berichterstattung?
+          description: Das Carbon Disclosure Project (CDP) ist eine internationale gemeinnützige Organisation, die Unternehmen, Städten, Staaten, Regionen und Behörden hilft, ihre Umweltauswirkungen offenzulegen. CDP betreibt eine weit verbreitete Datenbank mit Informationen über die Umweltauswirkungen von Unternehmen, einschließlich der globalen Treibhausgasemissionen.
+        B8:
+          text: Möchten Sie das myclimate Impact Label erhalten?
+    C_profile:
+      title: "C: CCF Profil"
+      qs:
+        C1:
+          text: Sollen auch noch zusätzliche, frühere Bilanzjahre berechnet werden? 
+          description: "Hinweis: Bei gleichzeitiger Abwicklung wird ein Rabatt von 20% auf CCF Customized und 30% auf CCF Advanced gewährt. Dieser ist im Pricing-Tool bereits miteinberechnet."
+        C2:
+          text: Wie viele zusätzliche Jahre werden berechnet?
+        C3:
+          text: Was für Standorttypen werden erfasst/was wird bilanziert?
+          description: Um welche Tätigkeiten / Typen von Standorten handelt es sich bei diesem Unternehmen
+        C4:
+          text: Wie viele einzeln auswertbare Standorte / Events sollen bilanziert werden?
+          description: Bitte Anzahl der benötigten "Knoten" nennen 
+        C5:
+          text: Sollen gewisse einzeln auswertbare Standorte in Untergruppen des Konzerns eingeteilt werden?
+          description: "Hierbei handelt sich um den Detailgrad der  Resultate / Emissionen. Auf welcher organisatorischen Ebene möchte das Unternehmen diese einsehen können? (Beispiel: nur konsolidiert, pro Gesellschaft, pro Standort..) Hinweis: die Dateneingabe muss ebenfalls auf dieser Ebene möglich sein."
+        C6:
+          text: Wie viele solcher Untergruppen sollen angelegt werden? 
+        C7:
+          text: Wie viele verschiedene Rohmaterialien/Produkte/Lebensmittel werden eingekauft? 
+        C8: 
+          text: Möchten Sie die Produkte/Materialien alle einzeln berechnen und erfassen oder sollen sie in Produkte-/Materialiengruppen geclustert werden?
+          description: |
+            Beispiel: Alle Einkaufspositionen zu Milch, Milchdrink, Vollmilch usw. können in EcoCloud als 'Milch' erfasst werden, oder einzeln. 
+
+            Beispiel 2: Alle Polyesterprodukte und -anteile von gemischten Fasern können unter Polyester zusammengefasst werden oder, wenn dies für den Kunden erforderlich ist, auch als Polyester-Shirt, Polyester-Socken, 50/50 Polyester-Baumwolle Shirts oder ähnlich erfasst werden.
+        C9:
+          text: Wünschen Sie Unterstützung bei der jährlichen Zuordnung/Gruppierung Ihrer Einkaufs-/Materiallisten zu den gemeinsam definierten Produkte-/Materialgruppen?
+          description: myclimate kann beispielsweise in einer Einkaufsliste alle unterschiedlichen Pizzatypen der Kategorie "Pizza" zuordnen.
+        C10:
+          text: "Falls bekannt: Für wie viele Produkte/Materialien möchten Sie einen kundenspezifischen Emissionsfaktor berechnen, der Ihre genauen Produktionsprozesse oder Materialien abbildet?"
+        C11:
+          text: Wie viele Personen werden voraussichtlich Daten erfassen?
+        C12:
+          text: Möchten Sie von der myclimate Mobilitätsumfrage (Pendelverkehr) profitieren?
+          description: Im Rahmen der Erstellung des CCF können die Scope 3.7 Emissionen zum Pendelverhalten Ihrer Mitarbeitenden mithilfe der Mobilitätsumfrage von myclimate ermittelt werden.
+    C_reporting:
+      title: "C: CCF Reporting"
+      qs:
+        C13:
+          text: Braucht der CCF einen externen Audit?
+        C14:
+          text: Wünschen Sie einen ausführlichen Klimabericht? 
+          description: |
+            Ausführlicher Bericht zum CCF (10-20 Seiten):
+              - Kurzbeschrieb Methodik
+              - Datenqualität
+              - Analyse Eingabedaten
+              - Analyse Resultate
+        C15:
+          text: Wünschen Sie einen zusätzlichen, ausführlichen Methodikbericht?
+          description: |
+            Ausführlicher Methodikbericht (in Berichtsform):
+              - General Information
+              - Accounting of Climate Impact
+              - System Boundary
+              - CCF Customized: Data inventory and calculation methodology (in detail)
+              - CCF Advanced: general validation process and modelling of data gaps
+        C16:
+          text: Muss der CCF SBTi-konform sein?
+        C17:
+          text: Sind Sie ein FLAG-pflichtiges Unternehmen?
+    C_print:
+      title: "C: CCF Druckbranche"
+      qs:
+        C18:
+          text: Möchten Sie die Printlösung Bronze, Silber oder Gold wählen?
+          description: |
+            Bronze: Kommunikationspartnerschaft Grundlage (Workshop für Verkaufspersonal, Materialien und myclimate Label), sowie myclimate Calculate
+              
+            Silber: Kommunikationspartnerschaft Grundlage, myclimate Calculate, CCF Erstellung in EcoCloud, CO2-Kurzbilanz
+            
+            Gold: Erweiterte Kommunikationspartnerschaft, myclimate Calculate, CCF Erstellung sowie einen ausführlichen Umweltkennzahlenbericht
+        C19:
+          text: Möchten Sie anstelle von myclimateCalculate selbst im Umfang der verursachten Emissionen an Klimaschutzprojekte spenden und das Impact Label "Wirkt nachhaltig" erhalten?
+          description: Durch die Teilnahme am Label-Programm entfällt die Option für myclimate Calculate, da die Druckerei selbst Klimaschutzprojekte in der Höhe ihrer verursachten Emissionen unterstützt.
+    D:
+      title: "D: Science Based Targets Initiative (SBTi)"
+      qs:
+        D1:
+          text: Unternehmensform (e.g. GmbH, öffentliche Institution, NGO,…)
+          description: Städte, Lokalregierungen, Öffentliche Institutionen, Bildungs- und Forschungsinstitutionen, sowie Non-Profits können momentan keine SBTi Ziele setzen
+        D2:
+          text: Möchte die Unternehmung kurzfristige Ziele setzen?
+          description: Kurzfristige Ziele beschränken sich auf einen Zeitraum von 5-10 Jahren ausgehend vom Jahr der Zieleinreichung. Kurzfristige Ziele sind die Mindestvoraussetzung bei SBTi und eine zwingende Voraussetzung um sich zusätzlich ein optionales Netto-Null Ziele zu setzen.
+        D3:
+          text: Möchte das Unternehmen auch Netto-Null / langfristige Ziele setzen?
+          description: Netto-Null Ziele müssen spätestens bis 2050 erreicht sein. Es ist nicht möglich, Netto-Null Ziele zu setzen, ohne auch Kurzfristige Ziele zu definieren.
+        D4:
+          text: Wünschen Sie Unterstützung bei der Einreichung der Ziele?
+          description: Diese Dienstleistung umfasst das Ausfüllen der vorgegebenen Einreichungsdokumente von SBTi.
+        D5:
+          text: Wünschen Sie Unterstützung bei der Validierung der Ziele?
+          description: Nach Einreichung der Ziele wird Ihnen ein 30-tägiges Validierungsfenster zugeteilt, in welchem SBTi Ihre Ziele und Daten prüft. Allfällige Fragen seitens SBTi müssen innerhalb von 2 Arbeitstagen beantwortet werden. myclimate unterstützt das Unternehmen dabei.
+        D6:
+          text: Wünschen Sie Unterstützung beim Monitoring?
+          description: Nach SBTi müssen Unternehmen den CCF nach GHG Protocol jährlich berechnen und über die Fortschritte im Vergleich zu den veröffentlichten Zielen öffentlich berichten. myclimate stellt die SBTi-Konformität des CCFs, die Vergleichbarkeit mit letztjährigen CCFs sowie die bestehende Gültigkeit der SBTi Ziele sicher. Gleichzeitig wird die Zielerreichung überprüft und die Wirkung der Massnahmen analysiert. 
+        D8:
+          text: Möchten Sie als KMU einreichen?
+          description: Es ist auch möglich, als Grossunternehmen einzureichen, beispielsweise wenn erwartet wird, dass die Unternehmung innerhalb der nächsten Jahre die KMU Kriterien nicht mehr erfüllen wird.
+        D7:
+          text: Müssen Sie Ziele gemäss FLAG-Richtlinie setzen?
+    E:
+      title: "E: Massnahmenberatung"
+      qs:
+        E1:
+          text: Existieren bereits Klimaziele für die Unternehmung? (intern oder extern, SBTi definiert oder geplant)
+        E2:
+          text: Wünschen Sie eine Prüfung resp. feinere Ausarbeitung bestehender Klimaziele?
+        E3:
+          text: Wünschen Sie die Entwicklung von Klimazielen?
+          description: Falls bereits im Rahmen einer SBTi Beratung Klimaziele definiert werden, hier "Nein" anwählen.
+        E4:
+          text: Wünschen Sie die Erarbeitung / weitere Ausarbeitung von Massnahmen / Massnahmenplänen?
+          description: myclimate unterstützt Sie beim Festlegen von konkreten Reduktionszielen, der Identifikation von möglichen Hotspots und Verbesserungspotentialen sowie bei der Entwicklung von Massnahmen zur CO2-Reduktion innerhalb Ihrer Wertschöpfungskette.
+        E5:
+          text: Für wie viele Geschäftsbereiche oder Standorte sollen die Massnahmen entwickelt werden?
+          description: "Hinweis: Bei mehr als drei Geschäftsbereichen steigt der Aufwand"
+        E6:
+          text: Wünschen Sie die Berechnung von Reduktionspotentialen und Absenkpfaden?
+          description: Absenkpfade zeigen die zeitliche Ausgestaltung der Treibhausgasreduktion basierend auf Massnahmenplänen auf.
+        E7:
+          text: Müssen Dokumente in beiden Sprachen (Englisch und Deutsch) vorhanden sein?
+        E8:
+          text: Möchten Sie Workshops mit verschiedenen Stakeholdern zur Massnahmenerarbeitung durchführen?
+          description: Stakeholder können Mitarbeitende, Mitglieder der Geschäftsleitung, Kund/-innen, Investor/-innen, Partner, Lieferanten usw. sein
+        E9:
+          text: Wie viele Workshops möchten Sie mit Stakeholdern durchführen?
+        E10:
+          text: Wünschen Sie ein Monitoringkonzept für einen bestehenden oder zu erarbeitenden Massnahmenplan?
+          description: Ein Monitoringkonzept gewährleistet die Nachvollziehbarkeit und Vergleichbarkeit von CCFs über die Folgejahre. Es stellt die Wirkung der umgesetzten Massnahmen dar und verschafft die Übersicht über den Grad der Zielerreichung. Dabei werden die umgesetzten Massnahmen analysiert und die erfolgten Reduktionen mit dem Massnahmenplan und- ziel abgeglichen und wo notwendig aktualisiert. 
+        E11:
+          text: Wünschen Sie eigene Klimaschutzprojekte in Ihrer Wertschöpfungskette (Insetting)?
+          description: Supply Chain Projekte beschreiben durch das Unternehmen finanzierte Klimaschutzprojekte, welche nachweisbar Emissionen in der vor- oder nachgelagerten Wertschöpfungskette (Scope 3 Emissionen) reduzieren oder sequestrieren. Dies geschieht häufig im Rahmen eines Scope 3 Reduktionsziels, z.B. eines SBTi Commitments. Die Umsetzung von Supply Chain Projekten kann gemäss Definition der International Platform for Insetting (IPI, April 2022) unter dem Begriff Insetting zusammengefasst werden.

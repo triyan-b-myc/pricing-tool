@@ -1,0 +1,101 @@
+output:
+  summary:
+    title: Zusammenfassung
+    columns: ["", "Modul", "Beschreibung", "Aufwand min (h)", "Aufwand min (AT)", "Aufwand max (AT)", "Aufwand min exkl. MwSt (CHF)", "Aufwand max exkl. MwSt (CHF)"]
+    terminology:
+      year1: Jahr 1
+      year1_services: "Total Erstjahreskosten: Dienstleistung"
+      year1_licenses: "Total Erstjahreskosten: Lizenz"
+      year1_solution: "Total Erstjahreskosten: Lösung"
+      year1_addons: "Zusätzliche Arbeitspakete nach Aufwand"
+      subsequent_years: Folgejahre
+      subsequent_years_services: "Total Folgejahre: Dienstleistung"
+      subsequent_years_licenses: "Total Folgejahre: Lizenz"
+      subsequent_years_solution: "Total Folgejahre: Lösung"
+      subsequent_years_addons: "Zusätzliche Arbeitspakete nach Aufwand"
+    PL:
+      description: Projectleitung
+
+  detailed:
+    title: Detaillierte Kostenaufteilung
+    columns: ["Modul", "Beschreibung", "Aufwand min (h)", "Aufwand min (AT)", "Aufwand max (AT)", "Aufwand min exkl. MwSt (CHF)", "Aufwand max exkl. MwSt (CHF)", "Erklärungen"]
+    A:
+      description: "Mapping workshop"
+      explanation: "Ein 8h Mapping Workshop fällt bei CCF Customized an und ein 4h Mapping bei Kunden, die mit einem CCF Advanced starten, aber von der Branche her CCF Customized Kunden wären."
+    B:
+      description: "Übertragung bestehender CO2-Bilanzen plus Lizenz (und allfällige SBTi-Beratung)"
+      explanation: "Nach Aufwand"
+    B_liz:
+      description: "Lizenz"
+    C:
+      description: "CCF Lösung"
+    C1_liz:
+      description: "myclimate Tool Lizenzgebühren"
+      explanation: "Zugang Plattform, Hosting, Wartung und Weiterentwicklung. Lizenzgebühren sind nicht mehr abhängig von der CCF Lösung."
+    C1_tool:
+      description: "Initiale Konfiguration"
+      explanation: | 
+        Die Konfiguration für CCF Advanced ist minimal. Es werden keine EFs vom FA Team berechnet und kein customizing gemacht. 
+        
+        Für CCF Customized: Aufwand für Tool Customizing ist abhängig von der Anzahl Standorte und der Anzahl zu bilanzierender Rohmaterialien/Lebensmittel/Waren sowie der Übernahme von Emissionsfaktoren vom FA Team ins Tool. Wird geclustert, gehen wir immer von 20 Clustern aus, egal wie viele Ausgangsmaterialien. 
+        Zusätzliche User erhöhen die Aufwände hier auch um 1 oder 2 h weil mehr Aufwand für das Tool aufsetzen, Zugänge erteilen. Ebenso erhöht sich der Aufwand um 1 oder 2h durch ""Untergruppen"" von Knoten, da diese zusätzlich angelegt werden müssen.
+    C1_ef:
+      description: "Berechnung der Emissionsfaktoren"
+      explanation: |
+        Bei CCF Customized-Kunden:
+        
+        Wenn sie wissen wie viele kundenspezifische EF's gerechnet werden sollen -> werden mit 1.5h-2.5h pro EF berechnet.
+        
+        Für den Rest der Materialien wird mit einem durchschnittlichen Aufwand von 15-30min gerechnet. Es ist klar, dass die nicht immer alle berechnet werden müssen, aber  Wird geclustert, fällt dieser Aufwand maximal 20mal an (maximale Anzahl Cluster). Wird nicht geclustert, mehr.
+        
+        Weiss der Kunde nicht, wie viele kundenspezifischen EF's er will, wird einfach für alles der Standard-FA Aufwand verrechnet. Wir nehmen an, dass es dann nicht für alle Materialien einen EF braucht, so dass ein gewisser Puffer da ist, um auch noch einen kundenspezifischen zu berechnen.
+    C2:
+      description: "Kick-Off-Termin"
+    C3_daten:
+      description: "Datensammlung und Vervollständigung der Daten durch myclimate"
+      explanation: "Betreuung des Kunden sowie Modellierung von Datenlücken. Erhöht sich mit Anzahl Standorten."
+    C3_extrajahre:
+      description: "Optional: Berechnung von  weiteren CCFs früherer Jahre "
+      explanation: "30% Rabatt bei CCF Advanced, 20% Rabatt bei Customized für zusätzliche Jahre. Kein Preis für Kick-off oder Customizing (da dies nur einmal anfällt)"
+    C3_liz:
+      description: "Lizenz Extrajahre"
+      explanation: "Lizenz immer gleich hoch"
+    C4:
+      description: "Plausibilisierung"
+      explanation: "Die Plausibilisierung hängt ab von der Anzahl Standorte und erhöht sich zusätzlich zu den Standardindikatoren um die Anzahl Materialien. Wird geclustert (immer 20 Cluster), werden 20 Materialien plausibilisiert. Wird alles einzeln eingetragen im Scope 3.1, wird alles einzeln plausibilisiert."
+    C5_abschluss:
+      description: "Berichte, Ergebnisaufbereitung und Präsentation: Kurzbericht, Abschlusspräsentation"
+    C5_kb:
+      description: "Optional: Ausführlicher Klimabericht"
+    C5_mb:
+      description: "Optional: Ausführlicher Methodikbericht"
+    C5_flag:
+      description: "FLAG Treibhausgasinventar"
+      explanation: "Ist für Kunden wichtig, die eine SBTi Beratung mitbuchen und FLAG-relevant sind und für Kunden, die bereits Ziele haben und nur den CCF mit uns machen, aber auch eine FLAG Auswertung benötigen. Enthält Aufwände für Auswertung und Bericht."
+    Cx_ms:
+      description: "Optional: Mobilitätsumfrage"
+    Cx_kat:
+      description: "Optional: Kategorisierung von Rohstofflisten"
+    Cx_audit:
+      description: "Optional: Auditbegleitung"
+    Cx_liz_print:
+      description: "Lizenz Druckbranchenlösung"
+    Cx_review:
+      description: "Optional: Review eines bestehenden CCF"
+    F:
+      description: "CCF und Monitoring in den Folgejahren"
+    F1:
+      description: "Analyse der Richtlinien und ihrer Einhaltung"
+      explanation: "Achtung: Monitoring SBTi Aufwände noch nicht abgebildet / geschätzt"
+    F2:
+      description: "CCF-Erstellung inkl. Lizenzkosten"
+    F3:
+      description: "CCF-Analyse"
+    F4:
+      description: "Analyse SBTi-Ziele"
+    F5:
+      description: "Analyse Massnahmen"
+    F6:
+      description: "Monitoring-Austausch"
+    Fx:
+      description: "Einmalig in Jahr 2: Mapping und CCF-Erweiterung bei Wechsel auf CCF Customized"

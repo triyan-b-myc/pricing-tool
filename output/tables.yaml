@@ -210,6 +210,17 @@
       style: 'font-weight: bold; background-color: #CBCBCB'
     
     - data: 
+        - "'B'"
+        - "'output.detailed.B_liz.description'"
+        - ""
+        - ""
+        - ""
+        - $aw_chf_b_liz
+        - $aw_chf_b_liz
+        - "'output.detailed.B_liz.explanation'"
+      style: 'background-color: #F0F0F0'
+    
+    - data: 
         - "'C'"
         - "'output.detailed.C.description'"
         - $aw_h_total_c_min
@@ -239,7 +250,7 @@
         - $fn_htod($aw_h_c_c1_tool_max)
         - $fn_htochf($aw_h_c_c1_tool_min)
         - $fn_htochf($aw_h_c_c1_tool_max)
-        - "'output.detailed.C1_liz.explanation'"
+        - "'output.detailed.C1_tool.explanation'"
       style: 'background-color: #FFD5E9'
     
     - data: 
@@ -431,167 +442,167 @@
     
     - data: 
         - "'  F2'"
-        - "'output.detailed.F1.description'"
+        - "'output.detailed.F2.description'"
         - $aw_h_total_f2_min
         - $aw_d_total_f2_min
         - $aw_d_total_f2_max
         - $aw_chf_total_f2_min
         - $aw_chf_total_f2_max
-        - "'output.detailed.F1.explanation'"
+        - "'output.detailed.F2.explanation'"
       style: 'background-color: #ECFDBF'
 
     - data: 
         - "'    F2 C1'"
-        - "'output.detailed.F2_C1_liz.description'"
+        - "'output.detailed.C1_liz.description'"
         - ""
         - ""
         - ""
         - $aw_chf_c_c1_dl_liz
         - $aw_chf_c_c1_dl_liz
-        - "'output.detailed.F2_C1_liz.explanation'"
+        - "'output.detailed.C1_liz.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'    F2 C1'"
-        - "'output.detailed.F2_C1_tool.description'"
+        - "'output.detailed.C1_tool.description'"
         - $aw_h_c_c1_dl_tool_min
         - $fn_htod($aw_h_c_c1_dl_tool_min)
         - $fn_htod($aw_h_c_c1_dl_tool_max)
         - $fn_htochf($aw_h_c_c1_dl_tool_min)
         - $fn_htochf($aw_h_c_c1_dl_tool_max)
-        - "'output.detailed.F2_C1_tool.explanation'"
+        - "'output.detailed.C1_tool.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'    F2 C2'"
-        - "'output.detailed.F2_C2.description'"
+        - "'output.detailed.C2.description'"
         - $aw_h_c_c2_dl_kickoff_min
         - $fn_htod($aw_h_c_c2_dl_kickoff_min)
         - $fn_htod($aw_h_c_c2_dl_kickoff_max)
         - $fn_htochf($aw_h_c_c2_dl_kickoff_min)
         - $fn_htochf($aw_h_c_c2_dl_kickoff_max)
-        - "'output.detailed.F2_C2.explanation'"
+        - "'output.detailed.C2.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'    F2 C3'"
-        - "'output.detailed.F2_C3_daten.description'"
+        - "'output.detailed.C3_daten.description'"
         - $aw_h_c_c3_dl_daten_min
         - $fn_htod($aw_h_c_c3_dl_daten_min)
         - $fn_htod($aw_h_c_c3_dl_daten_max)
         - $fn_htochf($aw_h_c_c3_dl_daten_min)
         - $fn_htochf($aw_h_c_c3_dl_daten_max)
-        - "'output.detailed.F2_C3_daten.explanation'"
+        - "'output.detailed.C3_daten.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'    F2 C4'"
-        - "'output.detailed.F2_C4.description'"
+        - "'output.detailed.C4.description'"
         - $aw_h_c_c4_dl_plaus_min
         - $fn_htod($aw_h_c_c4_dl_plaus_min)
         - $fn_htod($aw_h_c_c4_dl_plaus_max)
         - $fn_htochf($aw_h_c_c4_dl_plaus_min)
         - $fn_htochf($aw_h_c_c4_dl_plaus_max)
-        - "'output.detailed.F2_C4.explanation'"
+        - "'output.detailed.C4.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'    F2 C5'"
-        - "'output.detailed.F2_C5_abschluss.description'"
+        - "'output.detailed.C5_abschluss.description'"
         - $aw_h_c_c5_dl_abschluss_min
         - $fn_htod($aw_h_c_c5_dl_abschluss_min)
         - $fn_htod($aw_h_c_c5_dl_abschluss_max)
         - $fn_htochf($aw_h_c_c5_dl_abschluss_min)
         - $fn_htochf($aw_h_c_c5_dl_abschluss_max)
-        - "'output.detailed.F2_C5_abschluss.explanation'"
+        - "'output.detailed.C5_abschluss.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'    F2 C5'"
-        - "'output.detailed.F2_C5_kb.description'"
+        - "'output.detailed.C5_kb.description'"
         - $aw_h_c_c5_dl_kb_min
         - $fn_htod($aw_h_c_c5_dl_kb_min)
         - $fn_htod($aw_h_c_c5_dl_kb_max)
         - $fn_htochf($aw_h_c_c5_dl_kb_min)
         - $fn_htochf($aw_h_c_c5_dl_kb_max)
-        - "'output.detailed.F2_C5_kb.explanation'"
+        - "'output.detailed.C5_kb.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'    F2 C5'"
-        - "'output.detailed.F2_C5_mb.description'"
+        - "'output.detailed.C5_mb.description'"
         - $aw_h_c_c5_dl_mb_min
         - $fn_htod($aw_h_c_c5_dl_mb_min)
         - $fn_htod($aw_h_c_c5_dl_mb_max)
         - $fn_htochf($aw_h_c_c5_dl_mb_min)
         - $fn_htochf($aw_h_c_c5_dl_mb_max)
-        - "'output.detailed.F2_C5_mb.explanation'"
+        - "'output.detailed.C5_mb.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'    F2 C5'"
-        - "'output.detailed.F2_C5_flag.description'"
+        - "'output.detailed.C5_flag.description'"
         - $aw_h_c_c5_dl_flag_min
         - $fn_htod($aw_h_c_c5_dl_flag_min)
         - $fn_htod($aw_h_c_c5_dl_flag_max)
         - $fn_htochf($aw_h_c_c5_dl_flag_min)
         - $fn_htochf($aw_h_c_c5_dl_flag_max)
-        - "'output.detailed.F2_C5_flag.explanation'"
+        - "'output.detailed.C5_flag.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'    F2 Cx'"
-        - "'output.detailed.F2_Cx_ms.description'"
+        - "'output.detailed.Cx_ms.description'"
         - $aw_h_c_cx_dl_ms_min
         - $fn_htod($aw_h_c_cx_dl_ms_min)
         - $fn_htod($aw_h_c_cx_dl_ms_max)
         - $fn_htochf($aw_h_c_cx_dl_ms_min)
         - $fn_htochf($aw_h_c_cx_dl_ms_max)
-        - "'output.detailed.F2_Cx_ms.explanation'"
+        - "'output.detailed.Cx_ms.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'    F2 Cx'"
-        - "'output.detailed.F2_Cx_kat.description'"
+        - "'output.detailed.Cx_kat.description'"
         - ""
         - ""
         - ""
         - $daily_rate
         - $daily_rate
-        - "'output.detailed.F2_Cx_ms.explanation'"
+        - "'output.detailed.Cx_ms.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'    F2 Cx'"
-        - "'output.detailed.F2_Cx_audit.description'"
+        - "'output.detailed.Cx_audit.description'"
         - ""
         - ""
         - ""
         - $daily_rate
         - $daily_rate
-        - "'output.detailed.F2_Cx_audit.explanation'"
+        - "'output.detailed.Cx_audit.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'   F2 Cx'"
-        - "'output.detailed.F2_Cx_liz_print.description'"
+        - "'output.detailed.Cx_liz_print.description'"
         - ""
         - ""
         - ""
         - $aw_chf_c_cx_dl_liz_print
         - $aw_chf_c_cx_dl_liz_print
-        - "'output.detailed.F2_Cx_liz_print.explanation'"
+        - "'output.detailed.Cx_liz_print.explanation'"
       style: 'background-color: white'
     
     - data: 
         - "'    F2 Cx'"
-        - "'output.detailed.F2_Cx_review.description'"
+        - "'output.detailed.Cx_review.description'"
         - $aw_h_c_cx_dl_review_min
         - $fn_htod($aw_h_c_cx_dl_review_min)
         - $fn_htod($aw_h_c_cx_dl_review_max)
         - $fn_htochf($aw_h_c_cx_dl_review_min)
         - $fn_htochf($aw_h_c_cx_dl_review_max)
-        - "'output.detailed.F2_Cx_review.explanation'"
+        - "'output.detailed.Cx_review.explanation'"
       style: 'background-color: white'
     
     - data: 
