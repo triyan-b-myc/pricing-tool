@@ -2,6 +2,10 @@ questionnaire:
   title: Pricing Tool Questionnaire
   description: All visible questions are mandatory. 
   empty_section: "No questions for this section"
+  export: "Export preset"
+  export_name: "File name"
+  export_download: "Download"
+  import: "Import preset"
   sections:
     Z:
       title: General Information 

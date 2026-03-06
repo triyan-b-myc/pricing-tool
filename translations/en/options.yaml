@@ -86,14 +86,14 @@ options:
     - "<60"
     - "<100"
     - "<125"
-    - ">125"
+    - "&gt;125"
   c8:
     - Individual
     - Clustered
   c11:
     - "1-5"
     - "5-10"
-    - ">10"
+    - "&gt;10"
   c18:
     - Bronze with a one-time greenhouse gas balance in the initial year
     - Silver

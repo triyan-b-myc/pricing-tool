@@ -155,7 +155,6 @@ b1_fx_dl_cust_min_ef: $b1_fx_a_dl_cust
 b1_fx_dl_cust_max_ef: $b1_fx_a_dl_cust
 b1_fx_dl_cust_pl: $b1_fx_a_dl_cust
 
-
 ### B3
 b3_a_ia_adv: '[4, 4, 4][$B3] if $B3 is not None else None'
 b3_a_ia_cust: '[4, 6, 8][$B3] if $B3 is not None else None'
@@ -193,7 +192,7 @@ c7_c1_ia_cust_max_schatzung_customizing_tool: |
 c7_c1_ia_cust_min_zu_berechnende_efs: |
   0 if $C7 is None or $C10 is None else \
   max(0, $c7_clusters_actual[$C7] - $C10) if $C7 in [0, 1, 2] else \
-  c7_clusters_actual[$C7] if $C8 == 0 else \
+  $c7_clusters_actual[$C7] if $C8 == 0 else \
   max(0, $c7_clusters_actual[$C7] - $C10)
 c7_c1_ia_cust_min_ef: 0.25*$c7_c1_ia_cust_min_zu_berechnende_efs
 c7_c1_ia_cust_max_zu_berechnende_efs: $c7_c1_ia_cust_min_zu_berechnende_efs
@@ -282,7 +281,7 @@ c4_ec_basis_lizenz_cust: 650 + 50*$C4 if $C4 is not None else 0
 c4_s3_basis_lizenz_cust: '850'
 c4_s3_standort_lizenz_cust: $const_table_c4_s3_standort_lizenz_cust[$C4] if $C4 is not None else 0
 c4_s3_externe_kosten_lizenz_cust: 100 + 50*$C4 if $C4 is not None else 0
-c4_liz_ia_cust: | # Formula does not match excel starting from 2 locations
+c4_liz_ia_cust: |
   $c4_s3_basis_lizenz_cust + $c4_s3_standort_lizenz_cust if $Z4 == 0 else \
   $c4_ec_basis_lizenz_cust if $Z4 == 1 else \
   0
@@ -303,9 +302,11 @@ c4_c1_ia_cust_max_pl: 3.875 + 0.125*$C4 if $C4 is not None else 0
 c4_c1_ia_cust_min_pl: 0.5*$c4_c1_ia_cust_max_pl
 c4_c2_ia_cust_min: '2'
 c4_c2_ia_cust_max: '4'
-# Formula does not match excel starting from 6 locations
-c4_support_c3_ia_cust: 1*($C4 + 1) if $C4 is not None else 0
-c4_modellierung_c3_ia_cust: 2*$C4 if $C4 is not None else 0 
+c4_support_c3_ia_cust: min(1*($C4 + 1), 6) if $C4 is not None else 0
+c4_modellierung_c3_ia_cust: |
+  0 if $C4 is None else \
+  2*$C4 if $C4 < 12 else \
+  11 + $C4
 c4_c3_ia_cust: $c4_support_c3_ia_cust + $c4_modellierung_c3_ia_cust
 c4_basisaw_c4_ia_cust: 4 + 2*$C4 if $C4 is not None else 0
 c4_c4_ia_cust_min: $c4_basisaw_c4_ia_cust + $c7_skalierung_c4_ia
@@ -323,10 +324,11 @@ c4_c1_dl_cust_max_pl: '0'
 c4_c1_dl_cust_min_pl: 0.5*$c4_c1_dl_cust_max_pl
 c4_c2_dl_cust_min: '2'
 c4_c2_dl_cust_max: '4'
-# Formula does not match excel starting from 6 locations
-c4_support_c3_dl_cust: 1*($C4 + 1) if $C4 is not None else 0
-# Formula does not match excel starting from 12 locations
-c4_modellierung_c3_dl_cust: 2*$C4 if $C4 is not None else 0
+c4_support_c3_dl_cust: min(1*($C4 + 1), 6) if $C4 is not None else 0
+c4_modellierung_c3_dl_cust: |
+  0 if $C4 is None else \
+  2*$C4 if $C4 < 12 else \
+  11 + $C4
 c4_c3_dl_cust: $c4_support_c3_dl_cust + $c4_modellierung_c3_dl_cust
 c4_basisaw_c4_dl_cust: 4 + 2*$C4 if $C4 is not None else 0
 c4_c4_dl_cust_min: $c4_basisaw_c4_dl_cust + $c7_skalierung_c4_dl
@@ -372,10 +374,9 @@ c6_c1_ia_adv_tool: $fn_c1_ia_adv_tool($c6_multiplier)
 c6_c5_ia_adv: '0'
 c6_c1_dl_adv_tool: $c6_c1_ia_adv_tool
 c6_c5_dl_adv: '0'
-# Formula does not match excel
 c6_liz_ia_cust:  |
   0 if $C6 is None or $Z4 is None else \
-  $const_table_c4_s3_standort_lizenz_cust[$c6_multiplier] if $Z4 == 0 else \
+  $const_table_c4_s3_standort_lizenz_cust[3] if $Z4 == 0 else \
   $c6_multiplier * 50
 c6_liz_dl_cust: $c6_liz_ia_cust
 c6_c1_ia_cust_tool: $fn_c1_ia_cust_tool($c6_multiplier_cust)
@@ -387,7 +388,7 @@ c6_c5_dl_cust_max: '[3, 5, 9][$C6] if $C6 is not None else 0'
 
 
 ### C9
-# Missing data?
+# TODO: missing data?
 c9_c1_ia_cust_min_kategorisierung: '0'
 c9_c1_ia_cust_max_kategorisierung: $c9_c1_ia_cust_min_kategorisierung 
 c9_c1_dl_cust_min_kategorisierung: $c9_c1_ia_cust_min_kategorisierung

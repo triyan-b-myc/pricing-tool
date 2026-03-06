@@ -14,7 +14,7 @@ output:
       subsequent_years_solution: "Total Folgejahre: Lösung"
       subsequent_years_addons: "Zusätzliche Arbeitspakete nach Aufwand"
     PL:
-      description: Projectleitung
+      description: Projektleitung
 
   detailed:
     title: Detaillierte Kostenaufteilung

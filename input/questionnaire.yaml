@@ -17,7 +17,7 @@ Z:
     options: options.z6
   Z7:
     type: num_slider
-    slider: 10:200:5:100
+    slider: 0:200:5:100
 A:
   A1:
     type: select

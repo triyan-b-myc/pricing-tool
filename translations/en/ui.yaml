@@ -1,11 +1,6 @@
 ui:
   language: 
     title: Language
-  data_explorer:
-    title: Data explorer
-    col_value: "Value"
-    col_expr: "Expression"
-    description: View and verify all variables and logic
   C20:
     title: CCF solution initial year
     description: Based on the information collected, this automatically outputs which CCF solution should be offered in the initial year (first year of cooperation via offer).

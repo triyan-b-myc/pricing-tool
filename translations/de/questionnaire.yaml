@@ -2,6 +2,10 @@ questionnaire:
   title: Pricing Tool Fragebogen
   description: Alle sichtbaren Fragen sind Pflichtfragen.
   empty_section: Für diesen Abschnitt gibt es keine Fragen.
+  export: "Vorlage exportieren"
+  export_name: "Dateiname"
+  export_download: "Herunterladen"
+  import: "Vorlage importieren"
   sections:
     Z:
       title: Allgemeine Informationen 
