@@ -1,0 +1,58 @@
+{
+  "height": "500px",
+  "nodes": {
+    "color": "#5BC5F2" 
+  },
+  "edges": {
+    "color": {
+      "color": "#888888",
+      "highlight": "#E6007E"
+    }
+  },
+  "physics": {
+    "enabled": false,
+    "solver": "barnesHut",
+    "minVelocity": 1,
+    "maxVelocity": 100,
+    "stabilization": {
+      "enabled": true,
+      "fit": true
+    },
+    "timestep": 0.5
+  },
+  "layout": {
+    "hierarchical": {
+      "enabled": true,
+      "levelSeparation": 150,
+      "nodeSpacing": 100,
+      "treeSpacing": 100,
+      "blockShifting": true,
+      "edgeMinimization": true,
+      "parentCentralization": true,
+      "direction": "UD",
+      "sortMethod": "directed",
+      "shakeTowards": "leaves"
+    }
+  },
+  "interaction": {
+    "navigationButtons": true,
+    "tooltipDelay": 0,
+    "zoomView": false
+  },
+  "groups": null,
+  "minVelocity": 1,
+  "maxVelocity": 100,
+  "stabilization": true,
+  "fit": true,
+  "timestep": 0.5,
+  "solver": "barnesHut",
+  "levelSeparation": 150,
+  "nodeSpacing": 100,
+  "treeSpacing": 100,
+  "blockShifting": true,
+  "edgeMinimization": true,
+  "parentCentralization": true,
+  "direction": "LR",
+  "sortMethod": "directed",
+  "shakeTowards": "leaves"
+}

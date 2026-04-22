@@ -60,16 +60,16 @@ with st.sidebar:
     
     if preset is not None:
         preset_data = yaml.safe_load(preset)
-        for section_id in questionnaire:
-            for question_id in questionnaire[section_id]:
-                 qdata[question_id] = preset_data[question_id]  
-
-    for section_id in questionnaire:
+        for sid in questionnaire:
+            for qid in questionnaire[sid]:
+                qdata[qid] = preset_data[qid]
+  
+    for section_id, section in questionnaire.items():
         st.divider()
         st.subheader(f"{t(f"questionnaire.sections.{section_id}.title")}")
         is_empty_section = True
 
-        for question_id, question in questionnaire[section_id].items():        
+        for question_id, question in section.items():        
             var_name = f"questionnaire.sections.{section_id}.qs.{question_id}.required_if"
             if ut.eval_expr(question.get("required_if"), var_name, qdata) == False:
                 qdata[question_id] = None
@@ -77,33 +77,32 @@ with st.sidebar:
             is_empty_section = False
 
             qtext = f"{question_id}: {t(f"questionnaire.sections.{section_id}.qs.{question_id}.text")}"
-            try: qhelp = t(f"questionnaire.sections.{section_id}.qs.{question_id}.description")
-            except: qhelp = None
+            qhelp = t_safe(f"questionnaire.sections.{section_id}.qs.{question_id}.description")
 
             match question["type"]:
                 case "text":
-                    value = st.text_input(qtext, value=qdata.get(question_id, ""), help=qhelp)
+                    value = st.text_input(qtext, value=preset_data[question_id] if preset is not None else None, help=qhelp)
                 case "select":
                     opts_display = t(question["options"])
                     if len("".join(opts_display)) > 60:
                         value = st.selectbox(
-                        qtext,
-                        options=list(range(len(opts_display))),
-                        format_func=lambda i: opts_display[i],
-                        index=qdata.get(question_id),
-                        help=qhelp
-                    )
+                            qtext,
+                            options=list(range(len(opts_display))),
+                            format_func=lambda i: opts_display[i],
+                            index=preset_data[question_id] if preset is not None else None,
+                            help=qhelp
+                        )
                     else:
                         value = st.pills(
                             qtext,
                             options=list(range(len(opts_display))),
                             format_func=lambda i: opts_display[i],
                             help=qhelp,
-                            default=qdata.get(question_id)
+                            default=preset_data[question_id] if preset is not None else None,
                         )
                 case "num_slider":
                     min_val, max_val, step_val, start_val = tuple(int(i) for i in question["slider"].split(":"))
-                    value = st.slider(qtext, min_val, max_val, qdata.get(question_id, start_val), step_val, help=qhelp)
+                    value = st.slider(qtext, min_val, max_val, preset_data[question_id] if preset is not None else qdata.get(question_id, start_val), step_val, help=qhelp)
                 case _:
                     continue
 
