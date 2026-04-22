@@ -14,8 +14,10 @@ developers can extend functionality by adding new helpers or validators.
 ```
 pricing-tool/
 ├── app.py                           # Main application code
-├── utils/
-│   └── utils.py                     # I/O and expression evaluator
+├── core/
+│   ├── __init__.py                  # Core module initialization
+│   ├── utils.py                     # I/O and expression evaluator
+│   └── debugger.py                  # Interactive debugger for logic variables
 ├── input/
 │   └── questionnaire.yaml           # Definition of the user questions
 ├── logic/
@@ -26,15 +28,16 @@ pricing-tool/
 │   └── …                            # future logic may be split in additional files
 ├── output/
 │   └── tables.yaml                  # layout of the summary / detailed tables
-├── translations/                    # translations                    
-└── assets/                          # images, logos, etc.
+├── translations/                    # translations
+├── assets/                          # images, logos, etc.
+└── config.json                      # Configuration for debugger graph
 ```
 
 The page is initialised by app.py which:
 
 1. sets the page configuration and session state,
 2. loads translations, questionnaire, pricing logic and output tables through
-   helper functions in utils.py,
+   helper functions in core/utils.py,
 3. renders the sidebar where the user answers questions, and
 4. evaluates every expression defined in the logic files against the collected
    answers (`qdata`).
@@ -92,7 +95,7 @@ Logic is split into several files but merged at runtime.
   output tables consume.
 
 A logical variable is evaluated once; later expressions can reference it by
-name.  The evaluation engine in utils.py performs a regular‑expression
+name.  The evaluation engine in core/utils.py performs a regular‑expression
 substitution to turn `$VAR` into `qdata.get('VAR')` and then executes the
 resulting Python code in a restricted namespace (`qdata`, `math`).
 
@@ -106,6 +109,15 @@ application evaluates them before rendering.
 Translations for titles, column headers and terminology are managed under the
 `output:` key in the language files.
 
+## Debugger
+
+The application includes an interactive debugger accessible via an expandable section in the UI. It allows users to:
+
+- Browse all variables and their current values and expressions.
+- Visualize dependency trees and graphs for any variable.
+- Inspect individual variables in detail, including their types and full values.
+
+The debugger uses `streamlit-agraph` for graph visualization, configured via `config.json`.
 
 ## Translation
 
@@ -155,8 +167,8 @@ these steps:
   variables, prefix them with the question when appropriate.
 * When a formula becomes complex, consider adding intermediate variables for
   clarity.
-* Use the `data_explorer` (expandable section in the UI) to inspect current
-  values and the original expression; it is invaluable for debugging.
+* Use the `debugger` (expandable section in the UI) to inspect current
+  values, expressions, and dependency trees/graphs; it is invaluable for debugging.
 * If you add dependencies between questions (e.g. `required_if` conditions),
   remember to handle the case where the answered value is removed from
   `qdata`.
@@ -171,12 +183,13 @@ streamlit run app.py
 ```
 
 The sidebar contains the questionnaire; once answers are provided the computed
-metrics `C20` and `C21` appear, followed by the tables.
+metrics `C20` and `C21` appear, followed by the tables and the debugger section.
 
 ## Developer notes
 
-* utils.py is the only Python module used by application logic.  It
+* core/utils.py is the main Python module used by application logic.  It
   handles YAML loading and expression evaluation.
+* core/debugger.py provides an interactive debugger for exploring logic variables and their dependencies.
 * The evaluation context deliberately exposes only `qdata` and `math` to
   minimise unintended side effects.
 * The project is intentionally lightweight to ease maintenance by
